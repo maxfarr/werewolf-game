@@ -21,16 +21,17 @@ func _ready():
 	_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
 	target_update_timer = Timer.new()
 	target_update_timer.one_shot = false
-	target_update_timer.wait_time = 0.5
+	target_update_timer.wait_time = 1.2
 	target_update_timer.timeout.connect(_update_target_movement)
 	add_child(target_update_timer)
 	target_update_timer.start()
+	target_velocity = Vector2(_noise.get_noise_1d(Time.get_ticks_msec())*2.0, 0.0)
 	
 	%MinigameTimer.failure.connect(func(): SignalBus.minigame_failed.emit())
 	%MinigameTimer._start(time)
 
 func _update_target_movement():
-	target_velocity = Vector2(_noise.get_noise_1d(Time.get_ticks_msec()), 0.0)
+	target_velocity = Vector2(_noise.get_noise_1d(Time.get_ticks_msec())*2.0, 0.0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):

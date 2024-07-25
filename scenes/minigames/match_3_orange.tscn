@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c87jwitfgfk7b"]
+
+[ext_resource type="Texture2D" uid="uid://dotd4iti8tm0b" path="res://assets/Potion Screen/ingredient2.png" id="1_fxnta"]
+[ext_resource type="Script" path="res://scripts/minigames/match_3_tile.gd" id="2_5xf20"]
+
+[node name="Match3Orange" type="TextureRect"]
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("1_fxnta")
+stretch_mode = 2
+script = ExtResource("2_5xf20")
+color = "orange"

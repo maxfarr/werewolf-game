@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dd5xaxkseexq6"]
+[gd_scene load_steps=9 format=3 uid="uid://dd5xaxkseexq6"]
 
 [ext_resource type="Script" path="res://scenes/main/game_screen.gd" id="1_5i3jp"]
 [ext_resource type="Texture2D" uid="uid://lwl0515ctifm" path="res://assets/Main Screen/background.png" id="1_tas65"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cikan6wrp4482" path="res://scenes/minigames/eye_contact.tscn" id="3_t0bxb"]
 [ext_resource type="SpriteFrames" uid="uid://dmfct4ltbm0vi" path="res://assets/animations/potion_stages.tres" id="4_1rq4k"]
 [ext_resource type="SpriteFrames" uid="uid://dybs228lbkxxm" path="res://assets/animations/health_frame.tres" id="7_nmean"]
+[ext_resource type="PackedScene" uid="uid://cf6gplqeesi1j" path="res://scenes/main/match_3.tscn" id="8_bpi5a"]
 
 [node name="GameScreen" type="Node2D"]
 script = ExtResource("1_5i3jp")
@@ -72,5 +73,24 @@ position = Vector2(121, 68)
 
 [node name="EyeContact" parent="CurrentMinigame" instance=ExtResource("3_t0bxb")]
 
+[node name="PotionClickArea" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 244.0
+offset_right = 400.0
+offset_bottom = 226.0
+
+[node name="Match3" parent="PotionClickArea" instance=ExtResource("8_bpi5a")]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 118.0
+offset_right = 8.0
+offset_bottom = 118.0
+grid_width = 7
+grid_height = 5
+spacing = 20
+
 [connection signal="gui_input" from="MainClickArea" to="." method="_on_main_click_area_gui_input"]
 [connection signal="gui_input" from="MainClickArea/main_background" to="." method="_on_main_background_gui_input"]
+[connection signal="gui_input" from="PotionClickArea/Match3" to="PotionClickArea/Match3" method="_on_gui_input"]
