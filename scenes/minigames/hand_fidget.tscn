@@ -1,0 +1,108 @@
+[gd_scene load_steps=6 format=3 uid="uid://y8acnahafpgi"]
+
+[ext_resource type="SpriteFrames" uid="uid://csjhsxnolei5o" path="res://assets/animations/hand_shake.tres" id="1_emqim"]
+[ext_resource type="Script" path="res://scripts/minigames/hand_fidget.gd" id="1_fh8yw"]
+[ext_resource type="Texture2D" uid="uid://drusdw45v6jh6" path="res://assets/Mini games/hand-instructionsbackground.png" id="2_n03xd"]
+[ext_resource type="Texture2D" uid="uid://d0xre6rrrkkac" path="res://assets/Mini games/hand-mouseleft.png" id="3_dc0xa"]
+[ext_resource type="PackedScene" uid="uid://4aq1x6kyama" path="res://scenes/minigames/minigame_timer.tscn" id="5_ofhd4"]
+
+[node name="hand_fidget" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fh8yw")
+
+[node name="Hand" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(57, 209.665)
+sprite_frames = ExtResource("1_emqim")
+animation = &"shake"
+frame_progress = 0.497482
+
+[node name="Background" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = -65.0
+offset_top = 29.0
+offset_right = 75.0
+offset_bottom = 55.0
+mouse_filter = 2
+texture = ExtResource("2_n03xd")
+stretch_mode = 2
+
+[node name="mouse_instruction" type="TextureRect" parent="Background"]
+unique_name_in_owner = true
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = 8.0
+offset_top = 3.0
+offset_right = 23.0
+offset_bottom = 22.0
+mouse_filter = 2
+texture = ExtResource("3_dc0xa")
+
+[node name="mouse_instruction2" type="TextureRect" parent="Background"]
+unique_name_in_owner = true
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = 37.0
+offset_top = 3.0
+offset_right = 52.0
+offset_bottom = 22.0
+mouse_filter = 2
+texture = ExtResource("3_dc0xa")
+
+[node name="mouse_instruction3" type="TextureRect" parent="Background"]
+unique_name_in_owner = true
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = 64.0
+offset_top = 3.0
+offset_right = 79.0
+offset_bottom = 22.0
+mouse_filter = 2
+texture = ExtResource("3_dc0xa")
+
+[node name="mouse_instruction4" type="TextureRect" parent="Background"]
+unique_name_in_owner = true
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = 90.0
+offset_top = 3.0
+offset_right = 105.0
+offset_bottom = 22.0
+mouse_filter = 2
+texture = ExtResource("3_dc0xa")
+
+[node name="mouse_instruction5" type="TextureRect" parent="Background"]
+unique_name_in_owner = true
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = 118.0
+offset_top = 3.0
+offset_right = 133.0
+offset_bottom = 22.0
+mouse_filter = 2
+texture = ExtResource("3_dc0xa")
+
+[node name="MinigameTimer" parent="." instance=ExtResource("5_ofhd4")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+offset_left = 68.0
+offset_top = 16.0
+offset_right = 68.0
+offset_bottom = 16.0

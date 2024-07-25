@@ -1,18 +1,76 @@
-[gd_scene format=3 uid="uid://dd5xaxkseexq6"]
+[gd_scene load_steps=8 format=3 uid="uid://dd5xaxkseexq6"]
+
+[ext_resource type="Script" path="res://scenes/main/game_screen.gd" id="1_5i3jp"]
+[ext_resource type="Texture2D" uid="uid://lwl0515ctifm" path="res://assets/Main Screen/background.png" id="1_tas65"]
+[ext_resource type="Texture2D" uid="uid://v14no3pwy3ni" path="res://assets/Potion Screen/background.png" id="2_vas8p"]
+[ext_resource type="Texture2D" uid="uid://b0xq6j44gensd" path="res://assets/Main Screen/loveinterest-mainsprite.png" id="3_4utwp"]
+[ext_resource type="PackedScene" uid="uid://cikan6wrp4482" path="res://scenes/minigames/eye_contact.tscn" id="3_t0bxb"]
+[ext_resource type="SpriteFrames" uid="uid://dmfct4ltbm0vi" path="res://assets/animations/potion_stages.tres" id="4_1rq4k"]
+[ext_resource type="SpriteFrames" uid="uid://dybs228lbkxxm" path="res://assets/animations/health_frame.tres" id="7_nmean"]
 
 [node name="GameScreen" type="Node2D"]
+script = ExtResource("1_5i3jp")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 1220.0
-offset_bottom = 1080.0
-color = Color(0.572988, 0.572988, 0.572988, 1)
+[node name="MainClickArea" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 244.0
+offset_bottom = 226.0
 
-[node name="ColorRect2" type="ColorRect" parent="."]
+[node name="main_background" type="TextureRect" parent="MainClickArea"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_right = 244.0
+offset_bottom = 225.0
+texture = ExtResource("1_tas65")
+expand_mode = 1
+stretch_mode = 2
+
+[node name="love_interest" type="TextureRect" parent="MainClickArea"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = 56.0
+offset_top = 31.0
+offset_right = 196.0
+offset_bottom = 221.0
+texture = ExtResource("3_4utwp")
+stretch_mode = 2
+
+[node name="Avatar" type="AnimatedSprite2D" parent="MainClickArea"]
+unique_name_in_owner = true
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(34, 186)
+sprite_frames = ExtResource("7_nmean")
+frame = 3
+
+[node name="potion_background" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 1220.0
-offset_right = 1922.0
-offset_bottom = 1077.0
+offset_left = 243.0
+offset_right = 419.0
+offset_bottom = 234.0
 grow_horizontal = 0
-color = Color(0.270222, 0.270222, 0.270222, 1)
+texture = ExtResource("2_vas8p")
+stretch_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(286, 150)
+sprite_frames = ExtResource("4_1rq4k")
+
+[node name="CurrentMinigame" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(121, 68)
+
+[node name="EyeContact" parent="CurrentMinigame" instance=ExtResource("3_t0bxb")]
+
+[connection signal="gui_input" from="MainClickArea" to="." method="_on_main_click_area_gui_input"]
+[connection signal="gui_input" from="MainClickArea/main_background" to="." method="_on_main_background_gui_input"]

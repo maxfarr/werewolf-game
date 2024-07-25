@@ -1,3 +1,199 @@
-[gd_scene format=3 uid="uid://cikan6wrp4482"]
+[gd_scene load_steps=16 format=3 uid="uid://cikan6wrp4482"]
 
-[node name="EyeContact" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://kwraa8d10cbl" path="res://assets/Mini games/eye-bottombackground.png" id="1_itg4t"]
+[ext_resource type="Script" path="res://scripts/minigames/eye_contact.gd" id="1_yilgt"]
+[ext_resource type="Texture2D" uid="uid://cs7umw6yg2gte" path="res://assets/Mini games/eye-topbackground.png" id="2_1owd8"]
+[ext_resource type="Texture2D" uid="uid://6cv4kram37rs" path="res://assets/Mini games/eye-gamebar.png" id="3_3g8si"]
+[ext_resource type="Texture2D" uid="uid://c78wfouecx63a" path="res://assets/Mini games/eye-loveinterest.png" id="4_6sxx1"]
+[ext_resource type="Texture2D" uid="uid://dftjodgbc4sh" path="res://assets/Mini games/eye-startgame.png" id="5_1nejm"]
+[ext_resource type="Texture2D" uid="uid://b3c4vevbaqkvx" path="res://assets/Mini games/eye-gametarget.png" id="6_606h6"]
+[ext_resource type="Texture2D" uid="uid://c0vk7ra0qttdx" path="res://assets/Mini games/eye-gameindicator.png" id="7_awe0e"]
+[ext_resource type="PackedScene" uid="uid://4aq1x6kyama" path="res://scenes/minigames/minigame_timer.tscn" id="9_c2kij"]
+[ext_resource type="Texture2D" uid="uid://bih4ibwnblwg4" path="res://assets/Mini games/eye-barbg.png" id="9_igjwc"]
+[ext_resource type="Texture2D" uid="uid://cba7i2n6ro04x" path="res://assets/Mini games/eye-barfg.png" id="10_bchbe"]
+[ext_resource type="Texture2D" uid="uid://cwu4h36x46h0y" path="res://assets/Mini games/eye-text.png" id="12_c6m1k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_diwhe"]
+size = Vector2(19, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jx4el"]
+size = Vector2(4, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ge4te"]
+size = Vector2(35, 14)
+
+[node name="EyeContact" type="Control"]
+z_index = 5
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.309998
+offset_top = -2.0
+offset_right = -0.309998
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yilgt")
+
+[node name="ColorRect" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = -88.0
+offset_top = -24.0
+offset_right = 687.0
+offset_bottom = 531.0
+texture = ExtResource("1_itg4t")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 238.0
+offset_right = 1022.0
+offset_bottom = 794.0
+theme_override_font_sizes/font_size = 39
+text = "press space lol"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = -88.0
+offset_top = -55.0
+offset_right = 106.0
+offset_bottom = 32.0
+texture = ExtResource("2_1owd8")
+stretch_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = -65.0
+offset_top = 53.0
+offset_right = 120.0
+offset_bottom = 165.0
+texture = ExtResource("3_3g8si")
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = -24.0
+offset_top = -49.0
+offset_right = 81.0
+offset_bottom = -4.0
+texture = ExtResource("4_6sxx1")
+stretch_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = -80.69
+offset_top = 12.0
+offset_right = 37.31
+offset_bottom = 52.0
+texture = ExtResource("5_1nejm")
+stretch_mode = 2
+
+[node name="Eye" type="CharacterBody2D" parent="."]
+unique_name_in_owner = true
+z_index = 3
+position = Vector2(-53.69, 61)
+collision_layer = 2
+collision_mask = 2
+
+[node name="TextureRect6" type="Sprite2D" parent="Eye"]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("7_awe0e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Eye"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_diwhe")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(-65.69, 61)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0.309998, 0)
+shape = SubResource("RectangleShape2D_jx4el")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(65.31, 61)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(0.309998, 0)
+shape = SubResource("RectangleShape2D_jx4el")
+
+[node name="Target" type="CharacterBody2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Area2D" type="Area2D" parent="Target"]
+position = Vector2(-17.69, 54)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Target/Area2D"]
+position = Vector2(17.5, 7)
+shape = SubResource("RectangleShape2D_ge4te")
+
+[node name="TextureRect5" type="TextureRect" parent="Target"]
+offset_left = -17.69
+offset_top = 54.0
+offset_right = 22.31
+offset_bottom = 94.0
+texture = ExtResource("6_606h6")
+stretch_mode = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Target"]
+position = Vector2(-0.190002, 61)
+shape = SubResource("RectangleShape2D_ge4te")
+
+[node name="Progress" type="TextureProgressBar" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = -65.69
+offset_top = 72.0
+offset_right = 66.31
+offset_bottom = 84.0
+step = 0.01
+texture_under = ExtResource("9_igjwc")
+texture_progress = ExtResource("10_bchbe")
+texture_progress_offset = Vector2(2, 2)
+
+[node name="MinigameTimer" parent="." instance=ExtResource("9_c2kij")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 79.31
+offset_top = 40.0
+offset_right = 79.31
+offset_bottom = 40.0
+
+[node name="TextureRect5" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = -103.0
+offset_top = -63.0
+offset_right = -33.0
+offset_bottom = 1.0
+texture = ExtResource("12_c6m1k")
+stretch_mode = 2
+
+[connection signal="body_entered" from="Target/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Target/Area2D" to="." method="_on_area_2d_body_exited"]
