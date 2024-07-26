@@ -223,7 +223,7 @@ func _swap_tiles(first: Vector2i, second: Vector2i):
 		var temp = tiles_in_play[first.y][first.x][0]
 		tiles_in_play[first.y][first.x][0] = tiles_in_play[second.y][second.x][0]
 		tiles_in_play[second.y][second.x][0] = temp
-		_check_for_matches(first, second)
+		await _check_for_matches(first, second)
 		_currently_swapping = false
 	
 	_currently_swapping = true
@@ -260,8 +260,7 @@ func _find_swap_direction(first: Vector2i, second: Vector2i):
 			return SwipeDirection.LEFT
 
 func _on_gui_input(event):
-	if event is InputEventMouseButton:
-		print(event)
+	if event is InputEventMouseButton and not _currently_swapping:
 		if event.pressed:
 			swipe_start = _pixel_to_grid(event.position)
 		else:
