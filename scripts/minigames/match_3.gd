@@ -106,24 +106,42 @@ func _drop_tiles(empty_coords: Array):
 	if empty_coords.size() == 0:
 		return
 	
-	# find the top empty coord in each column
+	# find all the "top" empty coords (i.e., those with tiles above them that need to fall)
 	# check if there are any empty coords above this one and exclude if so
 	var top_coords = empty_coords.filter(func(coord): return Vector2i(coord.x, coord.y - 1) not in empty_coords)
 	
+	top_coords.sort_custom(func(a, b): return b.y > a.y)
+	var coords_to_check_for_combos = []
 	var tweens = []
 	for coord in top_coords:
-		if coord.y == 0:
+		if coord.y == 0 or tiles_in_play[coord.y-1][coord.x][0] == null:
 			continue
 		
 		var tile_coords_to_drop = []
 		for i in range(coord.y):
+			if tiles_in_play[i][coord.x][0] == null:
+				continue
 			tile_coords_to_drop.append(Vector2i(coord.x, i))
+		
+		if tile_coords_to_drop.size() == 0:
+			continue
 		
 		var spaces_to_drop = 1
 		if coord.y < grid_height - 1:
 			for i in range(coord.y + 1, grid_height):
 				if tiles_in_play[i][coord.x][0] == null:
 					spaces_to_drop += 1
+				else:
+					break
+		
+		# this might be a recursive call
+		# so we need to account for empty spaces on top of the stack
+		# in the later loop where we null the dropped tiles
+		var empty_spaces_above = 0
+		var top_dropped_row = tile_coords_to_drop.map(func(coord): return coord.y).min()
+		for i in range(top_dropped_row):
+			if tiles_in_play[i][coord.x][0] == null:
+				empty_spaces_above += 1
 		
 		tile_coords_to_drop.reverse()
 		for drop_coord in tile_coords_to_drop:
@@ -131,13 +149,24 @@ func _drop_tiles(empty_coords: Array):
 			tweens.append(tween)
 			tween.tween_property(tiles_in_play[drop_coord.y][drop_coord.x][0], "position", Vector2(tiles_in_play[drop_coord.y + spaces_to_drop][drop_coord.x][1]), 0.7).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 			tiles_in_play[drop_coord.y + spaces_to_drop][drop_coord.x][0] = tiles_in_play[drop_coord.y][drop_coord.x][0]
+			coords_to_check_for_combos.append(Vector2i(drop_coord.x, drop_coord.y + spaces_to_drop))
 		
 		if tile_coords_to_drop.size() > 0:
-			for i in range(spaces_to_drop):
+			for i in range(top_dropped_row, top_dropped_row+spaces_to_drop):
 				tiles_in_play[i][coord.x][0] = null
 			
 	if tweens.size() > 0:
 		await tweens[0].finished
+	
+	var total_combo_coords = []
+	for coord in coords_to_check_for_combos:
+		if tiles_in_play[coord.y][coord.x][0] == null:
+			continue
+		var matches = _find_matches_at_tile(coord, tiles_in_play[coord.y][coord.x][0].color)
+		if matches != null:
+			total_combo_coords.append_array(matches)
+			await _handle_matches(matches)
+	await _drop_tiles(total_combo_coords)
 
 func _replace_tiles():
 	var coords_to_replace = []
@@ -178,8 +207,8 @@ func _check_for_matches(first: Vector2i, second: Vector2i):
 	var second_matches = _find_matches_at_tile(second, tiles_in_play[second.y][second.x][0].color)
 	if second_matches != null:
 		total_matches.append_array(second_matches)
-		if first_matches != null:
-			await get_tree().create_timer(0.1).timeout
+		#if first_matches != null:
+			#await get_tree().create_timer(0.1).timeout
 		await _handle_matches(second_matches)
 	
 	await _drop_tiles(total_matches)
