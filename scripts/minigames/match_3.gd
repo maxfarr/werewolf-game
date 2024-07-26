@@ -5,17 +5,17 @@ extends Control
 @export var spacing: int
 
 const tiles = {
-	"yellow": preload("res://scenes/minigames/match_3_yellow.tscn"),
-	"orange": preload("res://scenes/minigames/match_3_orange.tscn"),
-	"red": preload("res://scenes/minigames/match_3_red.tscn")
+	"bone": preload("res://scenes/minigames/match_3_bone.tscn"),
+	"flower": preload("res://scenes/minigames/match_3_flower.tscn"),
+	"meat": preload("res://scenes/minigames/match_3_meat.tscn"),
+	"moon": preload("res://scenes/minigames/match_3_moon.tscn"),
+	"paw": preload("res://scenes/minigames/match_3_paw.tscn")
 }
 
-const colors = [
-	"yellow", "orange", "red"
-]
+const colors = ["bone", "flower", "meat", "moon", "paw"]
 
-var swipe_start: Vector2i
-var swipe_end: Vector2i
+var swipe_start
+var swipe_end
 
 var tiles_in_play: Array
 
@@ -83,9 +83,9 @@ func _generate_tiles():
 	
 	for i in range(grid_height):
 		for j in range(grid_width):
-			var tile = tiles[colors[randi_range(0, 2)]].instantiate()
+			var tile = tiles[colors[randi_range(0, colors.size()-1)]].instantiate()
 			while _find_matches_at_tile(Vector2i(j, i), tile.color) != null:
-				tile = tiles[colors[randi_range(0, 2)]].instantiate()
+				tile = tiles[colors[randi_range(0, colors.size()-1)]].instantiate()
 			tile.position = _grid_to_pixel(i, j)
 			tiles_in_play[i][j][0] = tile
 			add_child(tile)
@@ -98,7 +98,7 @@ func _grid_to_pixel(i, j):
 func _pixel_to_grid(pos):
 	var j = int(pos.x)/spacing
 	var i = int(pos.y)/spacing
-	if i >= grid_height or j >= grid_width:
+	if i >= grid_height or j >= grid_width or i < 0 or j < 0:
 		return null
 	return Vector2i(j, i)
 
@@ -176,9 +176,9 @@ func _replace_tiles():
 				coords_to_replace.append(Vector2i(j, i))
 	
 	for coord in coords_to_replace:
-		var tile = tiles[colors[randi_range(0, 2)]].instantiate()
+		var tile = tiles[colors[randi_range(0, colors.size()-1)]].instantiate()
 		while _find_matches_at_tile(Vector2i(coord.x, coord.y), tile.color) != null:
-			tile = tiles[colors[randi_range(0, 2)]].instantiate()
+			tile = tiles[colors[randi_range(0, colors.size()-1)]].instantiate()
 		tile.position = _grid_to_pixel(coord.y, coord.x)
 		tiles_in_play[coord.y][coord.x][0] = tile
 		tile.scale = Vector2(0, 0)
@@ -239,20 +239,44 @@ func _swap_tiles(first: Vector2i, second: Vector2i):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+	
+enum SwipeDirection {
+	UP, DOWN, LEFT, RIGHT
+}
 
-func _is_valid_swap(first: Vector2i, second: Vector2i):
-	if first.x == second.x and abs(first.y - second.y) == 1:
-		return true
-	elif first.y == second.y and abs(first.x - second.x) == 1:
-		return true
-		
-	return false
+func _find_swap_direction(first: Vector2i, second: Vector2i):
+	if first.x == second.x and first.y == second.y:
+		return null
+	
+	if first.x == second.x:
+		if first.y < second.y:
+			return SwipeDirection.DOWN
+		else:
+			return SwipeDirection.UP
+	elif first.y == second.y:
+		if first.x < second.x:
+			return SwipeDirection.RIGHT
+		else:
+			return SwipeDirection.LEFT
 
 func _on_gui_input(event):
 	if event is InputEventMouseButton:
+		print(event)
 		if event.pressed:
 			swipe_start = _pixel_to_grid(event.position)
 		else:
 			swipe_end = _pixel_to_grid(event.position)
-			if swipe_start != null and _is_valid_swap(swipe_start, swipe_end):
-				_swap_tiles(swipe_start, swipe_end)
+			if swipe_end == null:
+				swipe_start = null
+			elif swipe_start != null:
+				var direction = _find_swap_direction(swipe_start, swipe_end)
+				if direction != null:
+					match direction:
+						SwipeDirection.DOWN:
+							_swap_tiles(swipe_start, Vector2i(swipe_start.x, swipe_start.y+1))
+						SwipeDirection.UP:
+							_swap_tiles(swipe_start, Vector2i(swipe_start.x, swipe_start.y-1))
+						SwipeDirection.RIGHT:
+							_swap_tiles(swipe_start, Vector2i(swipe_start.x+1, swipe_start.y))
+						SwipeDirection.LEFT:
+							_swap_tiles(swipe_start, Vector2i(swipe_start.x-1, swipe_start.y))

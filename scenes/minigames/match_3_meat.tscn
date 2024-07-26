@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c87jwitfgfk7b"]
+
+[ext_resource type="Texture2D" uid="uid://dxrvffoqswbeu" path="res://assets/Potion Screen/ingredient1.png" id="1_812e3"]
+[ext_resource type="Script" path="res://scripts/minigames/match_3_tile.gd" id="2_iegt5"]
+
+[node name="Match3Orange" type="TextureRect"]
+texture_filter = 1
+texture_repeat = 1
+offset_right = 20.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("1_812e3")
+stretch_mode = 2
+script = ExtResource("2_iegt5")
+color = "meat"

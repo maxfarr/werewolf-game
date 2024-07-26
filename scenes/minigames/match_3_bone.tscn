@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bk4nthu5irjt1"]
+
+[ext_resource type="Texture2D" uid="uid://1e4cydven82d" path="res://assets/Potion Screen/ingredient5.png" id="1_83uo8"]
+[ext_resource type="Script" path="res://scripts/minigames/match_3_tile.gd" id="2_6yyda"]
+
+[node name="Match3Yellow" type="TextureRect"]
+offset_right = 20.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("1_83uo8")
+stretch_mode = 2
+script = ExtResource("2_6yyda")
+color = "bone"

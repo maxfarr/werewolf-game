@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1f33qd33rysb"]
+
+[ext_resource type="Texture2D" uid="uid://c683561n168pb" path="res://assets/Potion Screen/ingredient3.png" id="1_s224i"]
+[ext_resource type="Script" path="res://scripts/minigames/match_3_tile.gd" id="2_uxreb"]
+
+[node name="Match3Yellow" type="TextureRect"]
+texture_filter = 1
+texture_repeat = 1
+offset_right = 20.0
+offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
+texture = ExtResource("1_s224i")
+stretch_mode = 2
+script = ExtResource("2_uxreb")
+color = "flower"
