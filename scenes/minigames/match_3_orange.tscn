@@ -6,6 +6,7 @@
 [node name="Match3Orange" type="TextureRect"]
 offset_right = 20.0
 offset_bottom = 20.0
+pivot_offset = Vector2(10, 10)
 texture = ExtResource("1_fxnta")
 stretch_mode = 2
 script = ExtResource("2_5xf20")
