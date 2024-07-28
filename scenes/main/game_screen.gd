@@ -22,7 +22,7 @@ var next_minigame_timer: Timer
 var love_interest_animation_timer: Timer
 
 func _schedule_minigame():
-	next_minigame_timer.wait_time = randi_range(5, 12)
+	next_minigame_timer.wait_time = randi_range(GameState.event_delay_ranges[GameState.level][0], GameState.event_delay_ranges[GameState.level][1])
 	next_minigame_timer.start()
 
 func _spawn_minigame():
@@ -103,6 +103,7 @@ func _lose():
 		get_tree().change_scene_to_file("res://scenes/main/lose_screen.tscn"))
 
 func _finish_level():
+	next_minigame_timer.stop()
 	game_running = false
 	%Match3.running = false
 	if %CurrentMinigame.get_child_count() > 0:

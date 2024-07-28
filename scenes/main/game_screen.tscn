@@ -218,30 +218,30 @@ frame = 3
 [node name="SuccessSFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("15_age6k")
-volume_db = 3.748
+volume_db = 7.496
 
 [node name="FailureSFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("16_f0wog")
-volume_db = 3.748
+volume_db = 7.496
 
 [node name="TransformSFX1" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(31, 184)
 stream = ExtResource("17_kwcs8")
-volume_db = 3.748
+volume_db = 8.433
 
 [node name="TransformSFX2" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(31, 184)
 stream = ExtResource("18_datwm")
-volume_db = 3.748
+volume_db = 8.433
 
 [node name="TransformSFX3" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(31, 184)
 stream = ExtResource("19_jk47v")
-volume_db = 3.748
+volume_db = 8.433
 
 [node name="AvatarFlash" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -281,7 +281,7 @@ vertical_alignment = 1
 unique_name_in_owner = true
 position = Vector2(305, 93)
 stream = ExtResource("21_u6y33")
-volume_db = 4.685
+volume_db = 10.307
 
 [node name="Match3Combo3" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true

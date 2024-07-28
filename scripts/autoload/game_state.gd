@@ -13,6 +13,8 @@ const timer_durations_s = {
 
 const heat_speeds = [20.0, 22.0, 24.0, 28.0, 32.0]
 
+const event_delay_ranges = [[5, 10], [4, 8], [3, 7], [3, 5], [2, 4]]
+
 const dialogue_options = [
 	{"loveinterest": "What's your favorite food?", "correct": "Pizza", "wolfy": "People"}
 ]

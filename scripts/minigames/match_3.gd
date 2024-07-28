@@ -96,6 +96,11 @@ func _grid_to_pixel(i, j):
 		return null
 	return Vector2i(j*spacing, i*spacing)
 
+func _grid_to_pixel_center(i, j):
+	if i < 0 or j < 0 or i >= grid_height or j >= grid_width:
+		return null
+	return Vector2i(j*spacing + spacing/2, i*spacing + spacing/2)
+
 func _pixel_to_grid(pos):
 	var j = int(pos.x)/spacing
 	var i = int(pos.y)/spacing
@@ -258,19 +263,37 @@ enum SwipeDirection {
 }
 
 func _find_swap_direction(first: Vector2i, second: Vector2i):
-	if first.x == second.x and first.y == second.y:
+	var grid_first = _pixel_to_grid(first)
+	var grid_second = _pixel_to_grid(second)
+	
+	if grid_first == null or grid_second == null:
 		return null
 	
-	if first.x == second.x:
-		if first.y < second.y:
-			return SwipeDirection.DOWN
-		else:
-			return SwipeDirection.UP
-	elif first.y == second.y:
-		if first.x < second.x:
-			return SwipeDirection.RIGHT
-		else:
-			return SwipeDirection.LEFT
+	if grid_first.x == grid_second.x and grid_first.y == grid_second.y:
+		return null
+	
+	var center_first = _grid_to_pixel_center(grid_first.y, grid_first.x)
+	var relative = second - center_first
+	
+	if second.x > center_first.x and abs(relative.x) > abs(relative.y):
+		return SwipeDirection.RIGHT
+	elif second.y < center_first.y and abs(relative.y) > abs(relative.x):
+		return SwipeDirection.UP
+	elif second.x < center_first.x and abs(relative.x) > abs(relative.y):
+		return SwipeDirection.LEFT
+	elif second.y > center_first.y and abs(relative.y) > abs(relative.x):
+		return SwipeDirection.DOWN
+	
+	#if first.x == second.x:
+		#if first.y < second.y:
+			#return SwipeDirection.DOWN
+		#else:
+			#return SwipeDirection.UP
+	#elif first.y == second.y:
+		#if first.x < second.x:
+			#return SwipeDirection.RIGHT
+		#else:
+			#return SwipeDirection.LEFT
 	
 	return null
 
@@ -279,20 +302,21 @@ func _on_gui_input(event):
 		return
 	if event is InputEventMouseButton and not _currently_swapping:
 		if event.pressed:
-			swipe_start = _pixel_to_grid(event.position)
+			swipe_start = event.position
 		else:
-			swipe_end = _pixel_to_grid(event.position)
+			swipe_end = event.position
 			if swipe_end == null:
 				swipe_start = null
 			elif swipe_start != null:
 				var direction = _find_swap_direction(swipe_start, swipe_end)
 				if direction != null:
+					var swipe_start_grid = _pixel_to_grid(swipe_start)
 					match direction:
 						SwipeDirection.DOWN:
-							_swap_tiles(swipe_start, Vector2i(swipe_start.x, swipe_start.y+1))
+							_swap_tiles(swipe_start_grid, Vector2i(swipe_start_grid.x, swipe_start_grid.y+1))
 						SwipeDirection.UP:
-							_swap_tiles(swipe_start, Vector2i(swipe_start.x, swipe_start.y-1))
+							_swap_tiles(swipe_start_grid, Vector2i(swipe_start_grid.x, swipe_start_grid.y-1))
 						SwipeDirection.RIGHT:
-							_swap_tiles(swipe_start, Vector2i(swipe_start.x+1, swipe_start.y))
+							_swap_tiles(swipe_start_grid, Vector2i(swipe_start_grid.x+1, swipe_start_grid.y))
 						SwipeDirection.LEFT:
-							_swap_tiles(swipe_start, Vector2i(swipe_start.x-1, swipe_start.y))
+							_swap_tiles(swipe_start_grid, Vector2i(swipe_start_grid.x-1, swipe_start_grid.y))

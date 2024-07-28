@@ -98,13 +98,13 @@ func _ready():
 
 var mouse_left_down = false
 var MOUSE_ACCEL = 7.5
-var MOUSE_SENSITIVITY = 1.0
+var MOUSE_SENSITIVITY = 1.2
 func _handle_movement(event):
 	if game_running:
 		if event is InputEventMouseMotion:
 			if mouse_left_down:
 				#var accel = MOUSE_ACCEL if event.velocity.y > 0 else (0 if event.velocity.y == 0.0 else -MOUSE_ACCEL)
-				var accel = clamp(event.relative.y * MOUSE_SENSITIVITY, -12.0, 12.0)
+				var accel = clamp(event.relative.y * MOUSE_SENSITIVITY, -14.0, 14.0)
 				%Head.apply_force(Vector2(0, accel))
 		elif event is InputEventMouseButton:
 			if event.button_index == 1 and event.is_pressed():
