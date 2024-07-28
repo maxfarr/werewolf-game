@@ -16,11 +16,12 @@ const colors = ["bone", "flower", "meat", "moon", "paw"]
 
 var swipe_start
 var swipe_end
-
+var running = true
 var tiles_in_play: Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	running = true
 	_generate_tiles()
 
 func _find_matches_at_tile(tile_pos: Vector2i, color: String):
@@ -186,6 +187,7 @@ func _replace_tiles():
 		var tween = create_tween()
 		tween.tween_property(tile, "scale", Vector2(1, 1), 0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_OUT)
 
+var heat_per_tile = 30.0
 func _handle_matches(tile_coords: Array):
 	var tweens = []
 	for coord in tile_coords:
@@ -195,6 +197,15 @@ func _handle_matches(tile_coords: Array):
 		tween.tween_callback(tile.queue_free)
 		tweens.append(tween)
 		tiles_in_play[coord.y][coord.x][0] = null
+	%HeatBar.value = max(0, %HeatBar.value - (heat_per_tile*tile_coords.size()))
+	
+	if tile_coords.size() == 3:
+		%Match3Combo3.play()
+	elif tile_coords.size() == 4:
+		%Match3Combo4.play()
+	elif tile_coords.size() >= 5:
+		%Match3Combo5Plus.play()
+	
 	await tweens[0].finished
 
 func _check_for_matches(first: Vector2i, second: Vector2i):
@@ -227,12 +238,12 @@ func _swap_tiles(first: Vector2i, second: Vector2i):
 		_currently_swapping = false
 	
 	_currently_swapping = true
-	get_tree().create_timer(0.1).timeout.connect(func(): %Match3SlideSFX.play())
+	get_tree().create_timer(0.03).timeout.connect(func(): %Match3SlideSFX.play())
 	
 	var tile_tween = create_tween()
 	var temp = Vector2(tiles_in_play[first.y][first.x][1])
-	tile_tween.tween_property(tiles_in_play[first.y][first.x][0], "position", Vector2(tiles_in_play[second.y][second.x][1]), 0.5).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
-	tile_tween.parallel().tween_property(tiles_in_play[second.y][second.x][0], "position", temp, 0.5).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tile_tween.tween_property(tiles_in_play[first.y][first.x][0], "position", Vector2(tiles_in_play[second.y][second.x][1]), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tile_tween.parallel().tween_property(tiles_in_play[second.y][second.x][0], "position", temp, 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	
 	tile_tween.tween_callback(finalize_swap.bind(first, second))
 
@@ -260,6 +271,8 @@ func _find_swap_direction(first: Vector2i, second: Vector2i):
 			return SwipeDirection.LEFT
 
 func _on_gui_input(event):
+	if not running:
+		return
 	if event is InputEventMouseButton and not _currently_swapping:
 		if event.pressed:
 			swipe_start = _pixel_to_grid(event.position)

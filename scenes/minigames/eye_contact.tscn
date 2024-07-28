@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cikan6wrp4482"]
+[gd_scene load_steps=18 format=3 uid="uid://cikan6wrp4482"]
 
 [ext_resource type="Texture2D" uid="uid://kwraa8d10cbl" path="res://assets/Mini games/eye-bottombackground.png" id="1_itg4t"]
 [ext_resource type="Script" path="res://scripts/minigames/eye_contact.gd" id="1_yilgt"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bih4ibwnblwg4" path="res://assets/Mini games/eye-barbg.png" id="9_igjwc"]
 [ext_resource type="Texture2D" uid="uid://cba7i2n6ro04x" path="res://assets/Mini games/eye-barfg.png" id="10_bchbe"]
 [ext_resource type="Texture2D" uid="uid://cwu4h36x46h0y" path="res://assets/Mini games/eye-text.png" id="12_c6m1k"]
+[ext_resource type="AudioStream" uid="uid://dde2qr0fdy3pl" path="res://assets/wav/Eye Contact/WW_MiniGame_EyeContact_01.wav" id="13_qodpg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_diwhe"]
 size = Vector2(19, 12)
@@ -20,10 +21,13 @@ size = Vector2(19, 12)
 size = Vector2(4, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ge4te"]
+size = Vector2(15, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vylmq"]
 size = Vector2(35, 14)
 
 [node name="EyeContact" type="Control"]
-z_index = 5
+z_index = 10
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -160,7 +164,7 @@ stretch_mode = 2
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Target"]
 position = Vector2(-0.190002, 61)
-shape = SubResource("RectangleShape2D_ge4te")
+shape = SubResource("RectangleShape2D_vylmq")
 
 [node name="Progress" type="TextureProgressBar" parent="."]
 unique_name_in_owner = true
@@ -194,6 +198,12 @@ offset_right = -33.0
 offset_bottom = 1.0
 texture = ExtResource("12_c6m1k")
 stretch_mode = 2
+
+[node name="EyeContactSFX" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(66, 45)
+stream = ExtResource("13_qodpg")
+volume_db = 3.748
 
 [connection signal="body_entered" from="Target/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Target/Area2D" to="." method="_on_area_2d_body_exited"]

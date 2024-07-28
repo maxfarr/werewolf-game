@@ -1,0 +1,39 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://cbs5wxc7up0nj"
+path="res://.godot/imported/Wellfleet-Regular.otf-76fec69c70711d26232f146fd23aaf4e.fontdata"
+
+[deps]
+
+source_file="res://assets/fonts/Wellfleet-Regular.otf"
+dest_files=["res://.godot/imported/Wellfleet-Regular.otf-76fec69c70711d26232f146fd23aaf4e.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=0
+generate_mipmaps=false
+multichannel_signed_distance_field=false
+msdf_pixel_range=24
+msdf_size=12
+allow_system_fallback=true
+force_autohinter=false
+hinting=2
+subpixel_positioning=0
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[{
+"chars": [],
+"glyphs": [],
+"name": "New Configuration",
+"size": Vector2i(16, 0),
+"variation_embolden": 0.0
+}]
+language_support={}
+script_support={}
+opentype_features={}

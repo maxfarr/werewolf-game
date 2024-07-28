@@ -8,16 +8,16 @@ var target_velocity = Vector2(0.0, 0.0)
 
 var target_update_timer : Timer
 var minigame_timer : Timer
+var running = true
 
 var _noise = FastNoiseLite.new()
 
 var target_active = false
 var fill_speed = 50
 
-@export var time = 10.0
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	running = true
 	_noise.noise_type = FastNoiseLite.TYPE_SIMPLEX_SMOOTH
 	target_update_timer = Timer.new()
 	target_update_timer.one_shot = false
@@ -27,43 +27,51 @@ func _ready():
 	target_update_timer.start()
 	target_velocity = Vector2(_noise.get_noise_1d(Time.get_ticks_msec())*2.0, 0.0)
 	
-	%MinigameTimer.failure.connect(func(): SignalBus.minigame_failed.emit())
-	%MinigameTimer._start(time)
+	%EyeContactSFX.play()
+	
+	%MinigameTimer.failure.connect(func():
+		running = false
+		SignalBus.minigame_failed.emit())
+	%MinigameTimer._start(GameState.timer_durations_s["eye_contact"][GameState.level])
 
 func _update_target_movement():
 	target_velocity = Vector2(_noise.get_noise_1d(Time.get_ticks_msec())*2.0, 0.0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	if Input.is_mouse_button_pressed(1) and get_viewport().get_mouse_position().x < GameState.SCREEN_DIVISION_X:
-		eye_accel = Vector2(0.12, 0.0)
-	else:
-		eye_accel = Vector2(-0.12, 0.0)
-	
-	if eye_velocity.x + eye_accel.x > max_eye_speed:
-		eye_velocity.x = max_eye_speed
-	elif eye_velocity.x + eye_accel.x < -max_eye_speed:
-		eye_velocity.x = -max_eye_speed
-	else:
-		eye_velocity += eye_accel
+	if running:
+		if Input.is_mouse_button_pressed(1) and get_viewport().get_mouse_position().x < GameState.SCREEN_DIVISION_X:
+			eye_accel = Vector2(0.12, 0.0)
+		else:
+			eye_accel = Vector2(-0.12, 0.0)
 		
-	#var target_accel = Vector2(randf_range(-0.1, 0.1), 0.0)
-	#
-	#if target_velocity.x + target_accel.x > max_target_speed:
-		#target_velocity.x = max_target_speed
-	#elif target_velocity.x + target_accel.x < -max_target_speed:
-		#target_velocity.x = -max_target_speed
-	#else:
-		#target_velocity += target_accel
+		if eye_velocity.x + eye_accel.x > max_eye_speed:
+			eye_velocity.x = max_eye_speed
+		elif eye_velocity.x + eye_accel.x < -max_eye_speed:
+			eye_velocity.x = -max_eye_speed
+		else:
+			eye_velocity += eye_accel
+			
+		#var target_accel = Vector2(randf_range(-0.1, 0.1), 0.0)
+		#
+		#if target_velocity.x + target_accel.x > max_target_speed:
+			#target_velocity.x = max_target_speed
+		#elif target_velocity.x + target_accel.x < -max_target_speed:
+			#target_velocity.x = -max_target_speed
+		#else:
+			#target_velocity += target_accel
+			
 		
-	
-	%Eye.move_and_collide(eye_velocity)
-	%Target.move_and_collide(target_velocity)
-	
-	if target_active:
-		%Progress.value += %Progress.step * fill_speed
-		if %Progress.value >= %Progress.max_value:
-			SignalBus.minigame_succeeded.emit()
+		%Eye.move_and_collide(eye_velocity)
+		%Target.move_and_collide(target_velocity)
+		
+		if target_active:
+			%Progress.value += %Progress.step * fill_speed
+			if %Progress.value >= %Progress.max_value:
+				%MinigameTimer._stop()
+				%MinigameTimer.visible = false
+				running = false
+				SignalBus.minigame_succeeded.emit()
 
 func _on_area_2d_body_entered(body):
 	target_active = true

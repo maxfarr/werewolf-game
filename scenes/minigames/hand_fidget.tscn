@@ -1,12 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://y8acnahafpgi"]
+[gd_scene load_steps=9 format=3 uid="uid://y8acnahafpgi"]
 
 [ext_resource type="SpriteFrames" uid="uid://csjhsxnolei5o" path="res://assets/animations/hand_shake.tres" id="1_emqim"]
 [ext_resource type="Script" path="res://scripts/minigames/hand_fidget.gd" id="1_fh8yw"]
 [ext_resource type="Texture2D" uid="uid://drusdw45v6jh6" path="res://assets/Mini games/hand-instructionsbackground.png" id="2_n03xd"]
 [ext_resource type="Texture2D" uid="uid://d0xre6rrrkkac" path="res://assets/Mini games/hand-mouseleft.png" id="3_dc0xa"]
+[ext_resource type="Texture2D" uid="uid://b4jshcyuy2psn" path="res://assets/Mini games/hand-text1.png" id="5_gapmi"]
 [ext_resource type="PackedScene" uid="uid://4aq1x6kyama" path="res://scenes/minigames/minigame_timer.tscn" id="5_ofhd4"]
+[ext_resource type="Texture2D" uid="uid://lvvkbsi8kwsd" path="res://assets/Mini games/hand-text2.png" id="6_e1uq6"]
+[ext_resource type="Texture2D" uid="uid://brch1pobnlnb5" path="res://assets/Mini games/hand-text3.png" id="7_jayys"]
 
 [node name="hand_fidget" type="Control"]
+z_index = 10
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -97,6 +101,42 @@ offset_right = 133.0
 offset_bottom = 22.0
 mouse_filter = 2
 texture = ExtResource("3_dc0xa")
+
+[node name="GameText" type="TextureRect" parent="Background"]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = -32.0
+offset_top = -39.0
+offset_right = 23.0
+offset_bottom = 14.0
+texture = ExtResource("5_gapmi")
+
+[node name="GameText2" type="TextureRect" parent="Background"]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = -30.0
+offset_top = -26.0
+offset_right = 30.0
+offset_bottom = 22.0
+texture = ExtResource("6_e1uq6")
+
+[node name="GameText3" type="TextureRect" parent="Background"]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = -31.0
+offset_top = -30.0
+offset_right = 29.0
+offset_bottom = 18.0
+texture = ExtResource("7_jayys")
 
 [node name="MinigameTimer" parent="." instance=ExtResource("5_ofhd4")]
 unique_name_in_owner = true

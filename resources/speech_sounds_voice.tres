@@ -1,0 +1,38 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=12 format=3 uid="uid://c5067bo38dxom"]
+
+[ext_resource type="AudioStream" uid="uid://dwtxr6a4md57y" path="res://assets/wav/Dialogue/Hum/WW_Datedialogue_Hum_02.wav" id="2_rfc52"]
+[ext_resource type="AudioStream" uid="uid://naqfgvdfqq60" path="res://assets/wav/Dialogue/Hum/WW_Datedialogue_Hum_11.wav" id="3_dufs8"]
+[ext_resource type="AudioStream" uid="uid://digrx6v7psh65" path="res://assets/wav/Dialogue/Hum/WW_Datedialogue_Hum_12.wav" id="4_woymi"]
+[ext_resource type="AudioStream" uid="uid://bvgdve4r5uurd" path="res://assets/wav/Dialogue/Hum/WW_Datedialogue_Hum_03.wav" id="5_tuqp7"]
+[ext_resource type="AudioStream" uid="uid://dt21fmvetg8yw" path="res://assets/wav/Dialogue/Hum/WW_Datedialogue_Hum_04.wav" id="6_0dce5"]
+[ext_resource type="AudioStream" uid="uid://34qgw7rns1h4" path="res://assets/wav/Dialogue/Hum/WW_Datedialogue_Hum_05.wav" id="7_8g61b"]
+[ext_resource type="AudioStream" uid="uid://be6qjy15amtns" path="res://assets/wav/Dialogue/Hum/WW_Datedialogue_Hum_06.wav" id="8_21nk0"]
+[ext_resource type="AudioStream" uid="uid://3yegrgrel7gj" path="res://assets/wav/Dialogue/Hum/WW_Datedialogue_Hum_07.wav" id="9_xrlv2"]
+[ext_resource type="AudioStream" uid="uid://dmaxwv1gm56iw" path="res://assets/wav/Dialogue/Hum/WW_Datedialogue_Hum_08.wav" id="10_13vqm"]
+[ext_resource type="AudioStream" uid="uid://cxwlp8hpcd81t" path="res://assets/wav/Dialogue/Hum/WW_Datedialogue_Hum_09.wav" id="11_f6yo6"]
+[ext_resource type="AudioStream" uid="uid://x6aokndrbxkj" path="res://assets/wav/Dialogue/Hum/WW_Datedialogue_Hum_10.wav" id="12_dd1ml"]
+
+[resource]
+streams_count = 11
+stream_0/stream = ExtResource("2_rfc52")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("5_tuqp7")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("6_0dce5")
+stream_2/weight = 1.0
+stream_3/stream = ExtResource("7_8g61b")
+stream_3/weight = 1.0
+stream_4/stream = ExtResource("8_21nk0")
+stream_4/weight = 1.0
+stream_5/stream = ExtResource("9_xrlv2")
+stream_5/weight = 1.0
+stream_6/stream = ExtResource("10_13vqm")
+stream_6/weight = 1.0
+stream_7/stream = ExtResource("11_f6yo6")
+stream_7/weight = 1.0
+stream_8/stream = ExtResource("12_dd1ml")
+stream_8/weight = 1.0
+stream_9/stream = ExtResource("3_dufs8")
+stream_9/weight = 1.0
+stream_10/stream = ExtResource("4_woymi")
+stream_10/weight = 1.0

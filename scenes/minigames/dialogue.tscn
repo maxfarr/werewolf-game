@@ -1,0 +1,309 @@
+[gd_scene load_steps=23 format=3 uid="uid://bsh6gu6g2chyu"]
+
+[ext_resource type="Texture2D" uid="uid://la67tq6fo7o8" path="res://assets/Mini games/dialogue-loveinterest.png" id="1_3nrqw"]
+[ext_resource type="Script" path="res://scripts/minigames/dialogue.gd" id="1_qcvmb"]
+[ext_resource type="Texture2D" uid="uid://bvtud5ggbxa52" path="res://assets/Mini games/dialogue-player.png" id="2_0kmwc"]
+[ext_resource type="Texture2D" uid="uid://b7tths4h0f362" path="res://assets/Mini games/dialogue-playerindicator.png" id="3_s33qh"]
+[ext_resource type="Theme" uid="uid://dspynrvqosuyp" path="res://resources/micro_chat.tres" id="3_svaft"]
+[ext_resource type="Texture2D" uid="uid://cg3l3p70o211j" path="res://assets/Mini games/circle_obstacle.png" id="4_3xfvp"]
+[ext_resource type="Theme" uid="uid://dllw0cj5wjat7" path="res://resources/tomorrow_night.tres" id="8_8ku06"]
+[ext_resource type="Texture2D" uid="uid://jhbdfema2qeo" path="res://assets/Mini games/dialogue_right_edge.png" id="8_bk4nw"]
+[ext_resource type="AudioStream" uid="uid://c5067bo38dxom" path="res://resources/speech_sounds_voice.tres" id="9_ix8sk"]
+[ext_resource type="AudioStream" uid="uid://c738mqf151sju" path="res://assets/wav/UI/Start Tones/WW_StartTone_01.wav" id="10_cy0b7"]
+[ext_resource type="AudioStream" uid="uid://dr78wvm8p64nf" path="res://assets/wav/UI/Start Tones/WW_StartTone_02.wav" id="11_qqcyx"]
+[ext_resource type="Texture2D" uid="uid://gl1wr7b8lcrm" path="res://assets/Mini games/mouse-holdarrows-vertical.png" id="12_ruwhx"]
+[ext_resource type="PackedScene" uid="uid://4aq1x6kyama" path="res://scenes/minigames/minigame_timer.tscn" id="13_ocmko"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cbrje"]
+size = Vector2(3.69, 61)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8hw2"]
+size = Vector2(94, 4)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k0bbr"]
+radius = 4.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_34mxi"]
+size = Vector2(23, 1)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rv5n0"]
+friction = 0.0
+bounce = 0.75
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_01tjh"]
+radius = 6.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bltgs"]
+size = Vector2(21, 51)
+
+[sub_resource type="Animation" id="Animation_2my1h"]
+resource_name = "blink_instructions"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Instructions:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t0mv4"]
+_data = {
+"blink_instructions": SubResource("Animation_2my1h")
+}
+
+[node name="Dialogue" type="Control"]
+z_index = 10
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qcvmb")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = -105.0
+offset_top = -53.0
+offset_right = -9.0
+offset_bottom = 12.0
+mouse_filter = 2
+texture = ExtResource("1_3nrqw")
+stretch_mode = 2
+
+[node name="LoveInterestText" type="Label" parent="TextureRect"]
+unique_name_in_owner = true
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 96.0
+offset_bottom = 55.0
+theme = ExtResource("3_svaft")
+theme_override_font_sizes/font_size = 5
+text = "How do you feel about Kant's Categorical Imperative?"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = -105.0
+offset_top = 25.0
+offset_right = -27.0
+offset_bottom = 92.0
+mouse_filter = 2
+texture = ExtResource("2_0kmwc")
+stretch_mode = 2
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(-107, 50)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_cbrje")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(-66, 24)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_v8hw2")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(-66, 79)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_v8hw2")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="."]
+position = Vector2(-53, 33)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
+shape = SubResource("CircleShape2D_k0bbr")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D5"]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("4_3xfvp")
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="."]
+position = Vector2(-53, 69)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6"]
+shape = SubResource("CircleShape2D_k0bbr")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D6"]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("4_3xfvp")
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="."]
+position = Vector2(-75, 51)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D7"]
+shape = SubResource("CircleShape2D_k0bbr")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D7"]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("4_3xfvp")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-17.5, 51.5)
+shape = SubResource("RectangleShape2D_34mxi")
+
+[node name="Control" type="Control" parent="."]
+clip_contents = true
+anchors_preset = 0
+offset_left = -105.0
+offset_top = 25.0
+offset_right = -26.0
+offset_bottom = 78.0
+mouse_filter = 2
+
+[node name="Head" type="RigidBody2D" parent="Control"]
+unique_name_in_owner = true
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(13, 26)
+collision_layer = 3
+collision_mask = 3
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_rv5n0")
+gravity_scale = 0.05
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Head"]
+texture = ExtResource("3_s33qh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Head"]
+shape = SubResource("CircleShape2D_01tjh")
+
+[node name="Countdown" type="Label" parent="Control"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 21.0
+offset_top = 10.0
+offset_right = 61.0
+offset_bottom = 55.0
+pivot_offset = Vector2(19, 15)
+theme = ExtResource("8_8ku06")
+theme_override_font_sizes/font_size = 24
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Option1" type="Label" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = -21.0
+offset_top = 33.0
+offset_right = 25.0
+offset_bottom = 56.0
+theme = ExtResource("3_svaft")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 5
+text = "Pizza"
+
+[node name="Option2" type="Label" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = -21.0
+offset_top = 58.0
+offset_right = 35.0
+offset_bottom = 81.0
+theme = ExtResource("3_svaft")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 5
+text = "People"
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = -37.0
+offset_top = 26.0
+offset_right = 3.0
+offset_bottom = 77.0
+mouse_filter = 2
+texture = ExtResource("8_bk4nw")
+stretch_mode = 2
+
+[node name="FinishArea" type="Area2D" parent="."]
+position = Vector2(-1, 52)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishArea"]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_bltgs")
+
+[node name="DialogueTextSFX" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-66, 50)
+stream = ExtResource("9_ix8sk")
+volume_db = 2.811
+max_polyphony = 50
+panning_strength = 1.49
+
+[node name="CountdownSFX" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("10_cy0b7")
+volume_db = 1.874
+
+[node name="StartSFX" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("11_qqcyx")
+volume_db = 1.874
+
+[node name="Instructions" type="TextureRect" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 0
+offset_left = -49.0
+offset_top = 55.0
+offset_right = -10.0
+offset_bottom = 122.0
+texture = ExtResource("12_ruwhx")
+stretch_mode = 2
+
+[node name="MinigameTimer" parent="." instance=ExtResource("13_ocmko")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -115.0
+offset_top = 14.0
+offset_right = -115.0
+offset_bottom = 14.0
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_t0mv4")
+}
+
+[connection signal="body_entered" from="FinishArea" to="." method="_on_finish_area_body_entered"]
+[connection signal="finished" from="DialogueTextSFX" to="." method="_on_dialogue_text_sfx_finished"]

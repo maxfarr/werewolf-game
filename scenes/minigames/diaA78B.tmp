@@ -1,0 +1,139 @@
+[gd_scene load_steps=13 format=3 uid="uid://bsh6gu6g2chyu"]
+
+[ext_resource type="Texture2D" uid="uid://la67tq6fo7o8" path="res://assets/Mini games/dialogue-loveinterest.png" id="1_3nrqw"]
+[ext_resource type="Script" path="res://scripts/minigames/dialogue.gd" id="1_qcvmb"]
+[ext_resource type="Texture2D" uid="uid://bvtud5ggbxa52" path="res://assets/Mini games/dialogue-player.png" id="2_0kmwc"]
+[ext_resource type="Texture2D" uid="uid://b7tths4h0f362" path="res://assets/Mini games/dialogue-playerindicator.png" id="3_s33qh"]
+[ext_resource type="Texture2D" uid="uid://cg3l3p70o211j" path="res://assets/Mini games/circle_obstacle.png" id="4_3xfvp"]
+[ext_resource type="FontFile" uid="uid://byhs8v4ec7d5i" path="res://assets/fonts/BebasNeue-Regular.ttf" id="6_c7s6w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cbrje"]
+size = Vector2(4, 59)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8hw2"]
+size = Vector2(94, 4)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rv5n0"]
+friction = 0.0
+bounce = 0.7
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_01tjh"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k0bbr"]
+radius = 4.0
+
+[sub_resource type="Theme" id="Theme_a7j28"]
+default_font = ExtResource("6_c7s6w")
+
+[node name="Dialogue" type="Control"]
+z_index = 10
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qcvmb")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = -105.0
+offset_top = -53.0
+offset_right = -9.0
+offset_bottom = 12.0
+texture = ExtResource("1_3nrqw")
+stretch_mode = 2
+
+[node name="LoveInterestText" type="Label" parent="TextureRect"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = -105.0
+offset_top = 25.0
+offset_right = -27.0
+offset_bottom = 92.0
+texture = ExtResource("2_0kmwc")
+stretch_mode = 2
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(-107, 50)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(0.309998, 0.5)
+shape = SubResource("RectangleShape2D_cbrje")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+position = Vector2(-66, 23)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_v8hw2")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(-66, 78)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_v8hw2")
+
+[node name="Control" type="Control" parent="."]
+clip_contents = true
+anchors_preset = 0
+offset_left = -105.0
+offset_top = 25.0
+offset_right = -27.0
+offset_bottom = 76.0
+
+[node name="Head" type="RigidBody2D" parent="Control"]
+unique_name_in_owner = true
+position = Vector2(13, 14)
+mass = 0.05
+physics_material_override = SubResource("PhysicsMaterial_rv5n0")
+gravity_scale = 0.05
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Head"]
+texture = ExtResource("3_s33qh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/Head"]
+shape = SubResource("CircleShape2D_01tjh")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Control"]
+position = Vector2(43, 19)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/StaticBody2D2"]
+shape = SubResource("CircleShape2D_k0bbr")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/StaticBody2D2"]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("4_3xfvp")
+
+[node name="Countdown" type="Label" parent="Control"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 0
+offset_left = 19.0
+offset_top = 8.0
+offset_right = 59.0
+offset_bottom = 47.0
+theme = SubResource("Theme_a7j28")
+theme_override_font_sizes/font_size = 32
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b4ch2aeq12y51"
+path="res://.godot/imported/WW_Potion_HeatUp_01.wav-b071380dff47637e841160d37cf8ca9c.sample"
+
+[deps]
+
+source_file="res://assets/wav/Gameplay Elements/Potion/WW_Potion_HeatUp_01.wav"
+dest_files=["res://.godot/imported/WW_Potion_HeatUp_01.wav-b071380dff47637e841160d37cf8ca9c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

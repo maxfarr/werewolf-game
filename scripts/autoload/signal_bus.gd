@@ -3,3 +3,7 @@ extends Node
 signal minigame_failed
 signal minigame_succeeded
 signal hand_clicked
+signal dialogue_movement
+signal mouse_left_main_area
+signal dialogue_started
+signal dialogue_ended

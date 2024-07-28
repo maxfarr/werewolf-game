@@ -21,6 +21,9 @@ func _start(duration):
 	timer.start()
 	running = true
 
+func _stop():
+	timer.stop()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if running:

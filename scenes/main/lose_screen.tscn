@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://byucbay2g47gc"]
+
+[ext_resource type="Texture2D" uid="uid://dv3ha0yhovpf" path="res://assets/Endings/lose.png" id="1_f00ji"]
+[ext_resource type="Texture2D" uid="uid://cp7vuhuvwtmke" path="res://assets/Endings/lose-restart.png" id="2_jjppw"]
+
+[node name="LoseScreen" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 1
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_f00ji")
+stretch_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="."]
+texture_filter = 1
+offset_left = 366.0
+offset_top = 206.0
+offset_right = 406.0
+offset_bottom = 246.0
+texture_normal = ExtResource("2_jjppw")
+texture_pressed = ExtResource("2_jjppw")
+texture_hover = ExtResource("2_jjppw")

@@ -4,6 +4,9 @@ var instructions = []
 @onready var instruction_visuals = [
 	%mouse_instruction, %mouse_instruction2, %mouse_instruction3, %mouse_instruction4, %mouse_instruction5
 ]
+@onready var text_options = [
+	%GameText, %GameText2, %GameText3
+]
 var current_instruction = 0
 var running = false
 
@@ -29,9 +32,10 @@ func _generate_instructions():
 
 func _start_game():
 	running = true
+	text_options[randi_range(0, 2)].visible = true
 	%MinigameTimer.visible = true
 	%MinigameTimer.failure.connect(_lose_animation)
-	%MinigameTimer._start(5.0)
+	%MinigameTimer._start(GameState.timer_durations_s["hand_fidget"][GameState.level])
 	%Background.visible = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -57,10 +61,14 @@ func _win_animation():
 
 func _handle_click(mouse_button):
 	if running:
+		if mouse_button != 1 and mouse_button != 2:
+			return
+		
 		if mouse_button - 1 == instructions[current_instruction]:
 			instruction_visuals[current_instruction].visible = false
 			if current_instruction == 4:
 				running = false
+				%MinigameTimer._stop()
 				_win_animation()
 			current_instruction += 1
 		else:

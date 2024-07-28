@@ -1,10 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://dd5xaxkseexq6"]
+[gd_scene load_steps=27 format=3 uid="uid://dd5xaxkseexq6"]
 
 [ext_resource type="Script" path="res://scenes/main/game_screen.gd" id="1_5i3jp"]
 [ext_resource type="Texture2D" uid="uid://lwl0515ctifm" path="res://assets/Main Screen/background.png" id="1_tas65"]
 [ext_resource type="Texture2D" uid="uid://v14no3pwy3ni" path="res://assets/Potion Screen/background.png" id="2_vas8p"]
-[ext_resource type="Texture2D" uid="uid://b0xq6j44gensd" path="res://assets/Main Screen/loveinterest-mainsprite.png" id="3_4utwp"]
-[ext_resource type="PackedScene" uid="uid://cikan6wrp4482" path="res://scenes/minigames/eye_contact.tscn" id="3_t0bxb"]
 [ext_resource type="SpriteFrames" uid="uid://dmfct4ltbm0vi" path="res://assets/animations/potion_stages.tres" id="4_1rq4k"]
 [ext_resource type="SpriteFrames" uid="uid://dybs228lbkxxm" path="res://assets/animations/health_frame.tres" id="7_nmean"]
 [ext_resource type="PackedScene" uid="uid://cf6gplqeesi1j" path="res://scenes/main/match_3.tscn" id="8_bpi5a"]
@@ -13,45 +11,96 @@
 [ext_resource type="Texture2D" uid="uid://c7mul7ibntgt8" path="res://assets/Potion Screen/potionframe.png" id="9_xuuga"]
 [ext_resource type="Texture2D" uid="uid://d2r8al1kou10j" path="res://assets/Potion Screen/potion-fg.png" id="10_euitf"]
 [ext_resource type="SpriteFrames" uid="uid://dk6d2efdcbx4v" path="res://assets/animations/fire_stages.tres" id="11_40bjc"]
+[ext_resource type="SpriteFrames" uid="uid://bngn7u6sfwj6h" path="res://assets/animations/love_interest_animations.tres" id="13_04qh7"]
+[ext_resource type="Texture2D" uid="uid://d3bnh55u78qwu" path="res://assets/Main Screen/leveltimer-bg.png" id="14_eok7h"]
+[ext_resource type="AudioStream" uid="uid://dpyjo05ba32e6" path="res://assets/wav/UI/Success-Failure/WW_MiniGame_Success_01.wav" id="15_age6k"]
+[ext_resource type="Texture2D" uid="uid://bnbltptgm1evm" path="res://assets/Main Screen/leveltimer-fg.png" id="15_ufefh"]
+[ext_resource type="AudioStream" uid="uid://d3kapomjx852e" path="res://assets/wav/UI/Success-Failure/WW_MiniGame_Failure_01.wav" id="16_f0wog"]
+[ext_resource type="AudioStream" uid="uid://d0a13em6ny0i6" path="res://assets/wav/Damage/WW_Dmage_01.wav" id="17_kwcs8"]
+[ext_resource type="AudioStream" uid="uid://c4jxcc3yyc3v7" path="res://assets/wav/Damage/WW_Dmage_02.wav" id="18_datwm"]
+[ext_resource type="AudioStream" uid="uid://ds18qbc1p87r0" path="res://assets/wav/Damage/WW_Dmage_03.wav" id="19_jk47v"]
+[ext_resource type="Theme" uid="uid://bkar4nae0cei3" path="res://resources/wellfleet.tres" id="20_jmore"]
+[ext_resource type="AudioStream" uid="uid://ctujyw0tdfpt3" path="res://assets/wav/Gameplay Elements/Potion/WW_Potion_Explode_01.wav" id="21_u6y33"]
+[ext_resource type="AudioStream" uid="uid://citr2lh5755ht" path="res://assets/wav/Match 3/WW_M3_Success_Three.wav" id="22_ukkry"]
+[ext_resource type="AudioStream" uid="uid://c4c5sf3y850vp" path="res://assets/wav/Match 3/WW_M3_Success_Four.wav" id="23_ebnkn"]
+[ext_resource type="AudioStream" uid="uid://c1s0ubv7qke15" path="res://assets/wav/Match 3/WW_M3_Success_FiveAbove.wav" id="24_qigmr"]
+
+[sub_resource type="Animation" id="Animation_atwfp"]
+resource_name = "flash"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainClickArea/Avatar:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.764706, 0.0862745, 0.105882, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ixhps"]
+_data = {
+"flash": SubResource("Animation_atwfp")
+}
 
 [node name="GameScreen" type="Node2D"]
 script = ExtResource("1_5i3jp")
 
-[node name="MainClickArea" type="Control" parent="."]
+[node name="Timers" type="VBoxContainer" parent="."]
 unique_name_in_owner = true
-layout_mode = 3
-anchors_preset = 0
-offset_right = 244.0
-offset_bottom = 226.0
+z_index = 1
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 130.0
+offset_bottom = 130.0
 
-[node name="main_background" type="TextureRect" parent="MainClickArea"]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Timers"]
 texture_filter = 1
 texture_repeat = 1
-layout_mode = 0
-offset_right = 244.0
-offset_bottom = 225.0
-texture = ExtResource("1_tas65")
-expand_mode = 1
-stretch_mode = 2
+layout_mode = 2
+step = 0.1
+fill_mode = 4
+texture_under = ExtResource("14_eok7h")
+texture_progress = ExtResource("15_ufefh")
 
-[node name="love_interest" type="TextureRect" parent="MainClickArea"]
+[node name="TextureProgressBar2" type="TextureProgressBar" parent="Timers"]
 texture_filter = 1
 texture_repeat = 1
-layout_mode = 0
-offset_left = 56.0
-offset_top = 31.0
-offset_right = 196.0
-offset_bottom = 221.0
-texture = ExtResource("3_4utwp")
-stretch_mode = 2
+layout_mode = 2
+step = 0.1
+fill_mode = 4
+texture_under = ExtResource("14_eok7h")
+texture_progress = ExtResource("15_ufefh")
 
-[node name="Avatar" type="AnimatedSprite2D" parent="MainClickArea"]
-unique_name_in_owner = true
+[node name="TextureProgressBar3" type="TextureProgressBar" parent="Timers"]
 texture_filter = 1
 texture_repeat = 1
-position = Vector2(34, 186)
-sprite_frames = ExtResource("7_nmean")
-frame = 3
+layout_mode = 2
+step = 0.1
+fill_mode = 4
+texture_under = ExtResource("14_eok7h")
+texture_progress = ExtResource("15_ufefh")
+
+[node name="TextureProgressBar4" type="TextureProgressBar" parent="Timers"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+step = 0.1
+fill_mode = 4
+texture_under = ExtResource("14_eok7h")
+texture_progress = ExtResource("15_ufefh")
+
+[node name="TextureProgressBar5" type="TextureProgressBar" parent="Timers"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+step = 0.1
+fill_mode = 4
+texture_under = ExtResource("14_eok7h")
+texture_progress = ExtResource("15_ufefh")
 
 [node name="potion_background" type="TextureRect" parent="."]
 texture_filter = 1
@@ -70,8 +119,6 @@ stretch_mode = 2
 unique_name_in_owner = true
 position = Vector2(121, 68)
 
-[node name="EyeContact" parent="CurrentMinigame" instance=ExtResource("3_t0bxb")]
-
 [node name="PotionClickArea" type="Control" parent="."]
 unique_name_in_owner = true
 layout_mode = 3
@@ -81,6 +128,7 @@ offset_right = 400.0
 offset_bottom = 226.0
 
 [node name="Match3" parent="PotionClickArea" instance=ExtResource("8_bpi5a")]
+unique_name_in_owner = true
 layout_mode = 1
 offset_left = 14.0
 offset_top = 124.0
@@ -92,6 +140,7 @@ spacing = 21
 
 [node name="Match3SlideSFX" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(324, 169)
 stream = ExtResource("9_lqvou")
 volume_db = 10.306
 max_polyphony = 3
@@ -104,7 +153,8 @@ offset_left = 278.0
 offset_top = 57.0
 offset_right = 318.0
 offset_bottom = 108.0
-step = 0.1
+max_value = 1000.0
+step = 0.01
 fill_mode = 3
 texture_under = ExtResource("9_hoekc")
 texture_progress = ExtResource("10_euitf")
@@ -116,6 +166,7 @@ texture_filter = 1
 texture_repeat = 1
 position = Vector2(305, 94)
 sprite_frames = ExtResource("4_1rq4k")
+animation = &"medium"
 
 [node name="potion_frame" type="TextureRect" parent="."]
 texture_filter = 1
@@ -133,6 +184,125 @@ texture_repeat = 1
 position = Vector2(306, 112)
 sprite_frames = ExtResource("11_40bjc")
 
-[connection signal="gui_input" from="MainClickArea" to="." method="_on_main_click_area_gui_input"]
-[connection signal="gui_input" from="MainClickArea/main_background" to="." method="_on_main_background_gui_input"]
+[node name="MainClickArea" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 244.0
+offset_bottom = 226.0
+
+[node name="main_background" type="TextureRect" parent="MainClickArea"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_right = 244.0
+offset_bottom = 225.0
+texture = ExtResource("1_tas65")
+expand_mode = 1
+stretch_mode = 2
+
+[node name="LoveInterest" type="AnimatedSprite2D" parent="MainClickArea"]
+unique_name_in_owner = true
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(129, 125)
+sprite_frames = ExtResource("13_04qh7")
+
+[node name="Avatar" type="AnimatedSprite2D" parent="MainClickArea"]
+unique_name_in_owner = true
+texture_filter = 1
+texture_repeat = 1
+position = Vector2(34, 186)
+sprite_frames = ExtResource("7_nmean")
+frame = 3
+
+[node name="SuccessSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("15_age6k")
+volume_db = 3.748
+
+[node name="FailureSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("16_f0wog")
+volume_db = 3.748
+
+[node name="TransformSFX1" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(31, 184)
+stream = ExtResource("17_kwcs8")
+volume_db = 3.748
+
+[node name="TransformSFX2" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(31, 184)
+stream = ExtResource("18_datwm")
+volume_db = 3.748
+
+[node name="TransformSFX3" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(31, 184)
+stream = ExtResource("19_jk47v")
+volume_db = 3.748
+
+[node name="AvatarFlash" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_ixhps")
+}
+
+[node name="fadeout" type="ColorRect" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+z_index = 20
+offset_right = 400.0
+offset_bottom = 226.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="MinigameResult" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 15
+texture_filter = 1
+texture_repeat = 1
+offset_left = 39.0
+offset_top = 121.0
+offset_right = 222.0
+offset_bottom = 238.0
+pivot_offset = Vector2(90, 61.6)
+theme = ExtResource("20_jmore")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/font_size = 34
+text = "Nice!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PotionBreakSFX" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(305, 93)
+stream = ExtResource("21_u6y33")
+volume_db = 4.685
+
+[node name="Match3Combo3" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(324, 169)
+stream = ExtResource("22_ukkry")
+volume_db = 10.307
+
+[node name="Match3Combo4" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(324, 169)
+stream = ExtResource("23_ebnkn")
+volume_db = 10.307
+
+[node name="Match3Combo5Plus" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(324, 169)
+stream = ExtResource("24_qigmr")
+volume_db = 10.307
+
 [connection signal="gui_input" from="PotionClickArea/Match3" to="PotionClickArea/Match3" method="_on_gui_input"]
+[connection signal="gui_input" from="MainClickArea" to="." method="_on_main_click_area_gui_input"]
+[connection signal="mouse_exited" from="MainClickArea" to="." method="_on_main_click_area_mouse_exited"]
+[connection signal="gui_input" from="MainClickArea/main_background" to="." method="_on_main_background_gui_input"]

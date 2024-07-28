@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bkar4nae0cei3"]
+
+[ext_resource type="FontFile" uid="uid://cbs5wxc7up0nj" path="res://assets/fonts/Wellfleet-Regular.otf" id="1_tupdc"]
+
+[resource]
+default_font = ExtResource("1_tupdc")

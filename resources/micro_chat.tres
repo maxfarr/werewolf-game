@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dspynrvqosuyp"]
+
+[ext_resource type="FontFile" uid="uid://clffuqe123t2m" path="res://assets/fonts/Micro_Chat.ttf" id="1_b0p1t"]
+
+[resource]
+default_font = ExtResource("1_b0p1t")

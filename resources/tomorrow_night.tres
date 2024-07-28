@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dllw0cj5wjat7"]
+
+[ext_resource type="FontFile" uid="uid://bkx58ppbn4gpl" path="res://assets/fonts/Tomorrow_Night.ttf" id="1_5b6bv"]
+
+[resource]
+default_font = ExtResource("1_5b6bv")

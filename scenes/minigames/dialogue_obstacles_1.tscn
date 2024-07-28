@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cm7fseg371rr7"]
+
+[ext_resource type="Texture2D" uid="uid://cg3l3p70o211j" path="res://assets/Mini games/circle_obstacle.png" id="1_vc7hb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_srcxo"]
+radius = 4.0
+
+[node name="DialogueObstacles1" type="Node2D"]
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(49, 28)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("CircleShape2D_srcxo")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("1_vc7hb")
