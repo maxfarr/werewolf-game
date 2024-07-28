@@ -27,10 +27,12 @@ func _ready():
 	target_update_timer.start()
 	target_velocity = Vector2(_noise.get_noise_1d(Time.get_ticks_msec())*2.0, 0.0)
 	
+	%PlayerEyes.frame = 0
 	%EyeContactSFX.play()
 	
 	%MinigameTimer.failure.connect(func():
 		running = false
+		%PlayerEyes.frame = 2
 		SignalBus.minigame_failed.emit())
 	%MinigameTimer._start(GameState.timer_durations_s["eye_contact"][GameState.level])
 
@@ -71,6 +73,7 @@ func _physics_process(delta):
 				%MinigameTimer._stop()
 				%MinigameTimer.visible = false
 				running = false
+				%PlayerEyes.frame = 1
 				SignalBus.minigame_succeeded.emit()
 
 func _on_area_2d_body_entered(body):

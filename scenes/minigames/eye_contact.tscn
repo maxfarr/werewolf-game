@@ -1,11 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://cikan6wrp4482"]
+[gd_scene load_steps=19 format=3 uid="uid://cikan6wrp4482"]
 
 [ext_resource type="Texture2D" uid="uid://kwraa8d10cbl" path="res://assets/Mini games/eye-bottombackground.png" id="1_itg4t"]
 [ext_resource type="Script" path="res://scripts/minigames/eye_contact.gd" id="1_yilgt"]
 [ext_resource type="Texture2D" uid="uid://cs7umw6yg2gte" path="res://assets/Mini games/eye-topbackground.png" id="2_1owd8"]
 [ext_resource type="Texture2D" uid="uid://6cv4kram37rs" path="res://assets/Mini games/eye-gamebar.png" id="3_3g8si"]
 [ext_resource type="Texture2D" uid="uid://c78wfouecx63a" path="res://assets/Mini games/eye-loveinterest.png" id="4_6sxx1"]
-[ext_resource type="Texture2D" uid="uid://dftjodgbc4sh" path="res://assets/Mini games/eye-startgame.png" id="5_1nejm"]
+[ext_resource type="SpriteFrames" uid="uid://b0ib36626gcn5" path="res://assets/animations/eye_contact_stages.tres" id="6_7a1k1"]
 [ext_resource type="Texture2D" uid="uid://b3c4vevbaqkvx" path="res://assets/Mini games/eye-gametarget.png" id="6_606h6"]
 [ext_resource type="Texture2D" uid="uid://c0vk7ra0qttdx" path="res://assets/Mini games/eye-gameindicator.png" id="7_awe0e"]
 [ext_resource type="PackedScene" uid="uid://4aq1x6kyama" path="res://scenes/minigames/minigame_timer.tscn" id="9_c2kij"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cba7i2n6ro04x" path="res://assets/Mini games/eye-barfg.png" id="10_bchbe"]
 [ext_resource type="Texture2D" uid="uid://cwu4h36x46h0y" path="res://assets/Mini games/eye-text.png" id="12_c6m1k"]
 [ext_resource type="AudioStream" uid="uid://dde2qr0fdy3pl" path="res://assets/wav/Eye Contact/WW_MiniGame_EyeContact_01.wav" id="13_qodpg"]
+[ext_resource type="Texture2D" uid="uid://cuxlfdyjda88n" path="res://assets/Mini games/mouse-hold.png" id="14_io8or"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_diwhe"]
 size = Vector2(19, 12)
@@ -97,16 +98,12 @@ offset_bottom = -4.0
 texture = ExtResource("4_6sxx1")
 stretch_mode = 2
 
-[node name="TextureRect4" type="TextureRect" parent="."]
+[node name="PlayerEyes" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
 texture_filter = 1
 texture_repeat = 1
-layout_mode = 0
-offset_left = -80.69
-offset_top = 12.0
-offset_right = 37.31
-offset_bottom = 52.0
-texture = ExtResource("5_1nejm")
-stretch_mode = 2
+position = Vector2(-19.69, 31.5)
+sprite_frames = ExtResource("6_7a1k1")
 
 [node name="Eye" type="CharacterBody2D" parent="."]
 unique_name_in_owner = true
@@ -204,6 +201,16 @@ unique_name_in_owner = true
 position = Vector2(66, 45)
 stream = ExtResource("13_qodpg")
 volume_db = 3.748
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 70.31
+offset_top = 66.5
+offset_right = 110.31
+offset_bottom = 106.5
+texture = ExtResource("14_io8or")
+stretch_mode = 2
 
 [connection signal="body_entered" from="Target/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Target/Area2D" to="." method="_on_area_2d_body_exited"]

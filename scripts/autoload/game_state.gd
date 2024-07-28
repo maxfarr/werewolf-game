@@ -11,7 +11,7 @@ const timer_durations_s = {
 	"dialogue" : [8.0, 8.0, 7.0, 7.0, 6.0]
 }
 
-const heat_speeds = [20.0, 22.0, 24.0, 26.0, 28.0]
+const heat_speeds = [20.0, 22.0, 24.0, 28.0, 32.0]
 
 const dialogue_options = [
 	{"loveinterest": "What's your favorite food?", "correct": "Pizza", "wolfy": "People"}

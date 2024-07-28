@@ -20,7 +20,6 @@ color = Color(0, 0, 0, 1)
 
 [node name="Screen1" type="Control" parent="."]
 unique_name_in_owner = true
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 196.0
@@ -28,7 +27,7 @@ offset_top = 112.0
 offset_right = 196.0
 offset_bottom = 112.0
 
-[node name="Panel1-1" type="TextureRect" parent="Screen1"]
+[node name="Panel1_1" type="TextureRect" parent="Screen1"]
 unique_name_in_owner = true
 texture_filter = 1
 texture_repeat = 1
@@ -40,8 +39,9 @@ offset_bottom = 105.0
 texture = ExtResource("2_j16au")
 stretch_mode = 2
 
-[node name="Panel1-2" type="TextureRect" parent="Screen1"]
+[node name="Panel1_2" type="TextureRect" parent="Screen1"]
 unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
 texture_filter = 1
 texture_repeat = 1
 layout_mode = 0
@@ -53,13 +53,13 @@ texture = ExtResource("3_6gw33")
 
 [node name="Screen2" type="Control" parent="."]
 unique_name_in_owner = true
-visible = false
+modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 400.0
 offset_bottom = 225.0
 
-[node name="Panel2-1" type="TextureRect" parent="Screen2"]
+[node name="Panel2_1" type="TextureRect" parent="Screen2"]
 unique_name_in_owner = true
 texture_filter = 1
 texture_repeat = 1
@@ -70,8 +70,9 @@ offset_right = 244.0
 offset_bottom = 217.0
 texture = ExtResource("4_73xdm")
 
-[node name="Panel2-2" type="TextureRect" parent="Screen2"]
+[node name="Panel2_2" type="TextureRect" parent="Screen2"]
 unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
 texture_filter = 1
 texture_repeat = 1
 layout_mode = 0
@@ -81,8 +82,9 @@ offset_right = 394.0
 offset_bottom = 101.0
 texture = ExtResource("5_5pbws")
 
-[node name="Panel2-3" type="TextureRect" parent="Screen2"]
+[node name="Panel2_3" type="TextureRect" parent="Screen2"]
 unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
 texture_filter = 1
 texture_repeat = 1
 layout_mode = 0
@@ -94,13 +96,13 @@ texture = ExtResource("6_xcjhu")
 
 [node name="Screen3" type="Control" parent="."]
 unique_name_in_owner = true
-visible = false
+modulate = Color(1, 1, 1, 0)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 400.0
 offset_bottom = 225.0
 
-[node name="Panel3-1" type="TextureRect" parent="Screen3"]
+[node name="Panel3_1" type="TextureRect" parent="Screen3"]
 unique_name_in_owner = true
 texture_filter = 1
 texture_repeat = 1
@@ -112,18 +114,19 @@ offset_bottom = 217.0
 texture = ExtResource("7_dve0j")
 stretch_mode = 2
 
-[node name="Panel3-2" type="TextureRect" parent="Screen3"]
+[node name="Panel3_2" type="TextureRect" parent="Screen3"]
 unique_name_in_owner = true
 texture_filter = 1
 texture_repeat = 1
 layout_mode = 0
-offset_left = 240.0
+offset_left = 410.0
 offset_top = 32.0
-offset_right = 386.0
+offset_right = 556.0
 offset_bottom = 188.0
 texture = ExtResource("8_ouf4q")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Mouse" type="TextureRect" parent="."]
+unique_name_in_owner = true
 visible = false
 texture_filter = 1
 texture_repeat = 1
@@ -133,3 +136,11 @@ offset_right = 780.0
 offset_bottom = 425.0
 texture = ExtResource("9_qrcwu")
 stretch_mode = 2
+
+[node name="ClickArea" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 400.0
+offset_bottom = 225.0
+
+[connection signal="gui_input" from="ClickArea" to="." method="_on_click_area_gui_input"]
