@@ -235,6 +235,8 @@ func _swap_tiles(first: Vector2i, second: Vector2i):
 		tiles_in_play[first.y][first.x][0] = tiles_in_play[second.y][second.x][0]
 		tiles_in_play[second.y][second.x][0] = temp
 		await _check_for_matches(first, second)
+		swipe_start = null
+		swipe_end = null
 		_currently_swapping = false
 	
 	_currently_swapping = true
@@ -261,14 +263,20 @@ func _find_swap_direction(first: Vector2i, second: Vector2i):
 	
 	if first.x == second.x:
 		if first.y < second.y:
+			print("down")
 			return SwipeDirection.DOWN
 		else:
+			print("up")
 			return SwipeDirection.UP
 	elif first.y == second.y:
 		if first.x < second.x:
+			print("right")
 			return SwipeDirection.RIGHT
 		else:
+			print("left")
 			return SwipeDirection.LEFT
+	
+	return null
 
 func _on_gui_input(event):
 	if not running:
@@ -281,6 +289,8 @@ func _on_gui_input(event):
 			if swipe_end == null:
 				swipe_start = null
 			elif swipe_start != null:
+				print("start: ", swipe_start)
+				print("end: ", swipe_end)
 				var direction = _find_swap_direction(swipe_start, swipe_end)
 				if direction != null:
 					match direction:
