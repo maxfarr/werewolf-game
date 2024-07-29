@@ -98,18 +98,31 @@ func _ready():
 
 var mouse_left_down = false
 var MOUSE_ACCEL = 7.5
-var MOUSE_SENSITIVITY = 1.2
+var MOUSE_SENSITIVITY = 0.1
+var current_mouse_accel = 0.0
+var indicator_starting_y = -6.0
 func _handle_movement(event):
 	if game_running:
 		if event is InputEventMouseMotion:
 			if mouse_left_down:
 				#var accel = MOUSE_ACCEL if event.velocity.y > 0 else (0 if event.velocity.y == 0.0 else -MOUSE_ACCEL)
-				var accel = clamp(event.relative.y * MOUSE_SENSITIVITY, -14.0, 14.0)
-				%Head.apply_force(Vector2(0, accel))
+				current_mouse_accel += event.relative.y * MOUSE_SENSITIVITY
+				current_mouse_accel = clamp(current_mouse_accel, -5.0, 5.0)
+				var offset = indicator_starting_y + current_mouse_accel/2
+				if current_mouse_accel < 0:
+					%MovementIndicatorUp.position.y = offset
+					%MovementIndicatorDown.position.y = indicator_starting_y
+				else:
+					%MovementIndicatorDown.position.y = offset
+					%MovementIndicatorUp.position.y = indicator_starting_y
+				%Head.apply_force(Vector2(0, current_mouse_accel))
 		elif event is InputEventMouseButton:
 			if event.button_index == 1 and event.is_pressed():
 				mouse_left_down = true
 			elif event.button_index == 1 and not event.is_pressed():
+				%MovementIndicatorDown.position.y = indicator_starting_y
+				%MovementIndicatorUp.position.y = indicator_starting_y
+				current_mouse_accel = 0.0
 				mouse_left_down = false
 
 func _mouse_left_area():

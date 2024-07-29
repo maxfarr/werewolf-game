@@ -44,6 +44,7 @@ hands_right={
 
 [physics]
 
+2d/default_gravity=880.0
 2d/default_gravity_vector=Vector2(1, 0)
 
 [rendering]
