@@ -7,3 +7,4 @@ signal dialogue_movement
 signal mouse_left_main_area
 signal dialogue_started
 signal dialogue_ended
+signal fullscreen_mouse_up

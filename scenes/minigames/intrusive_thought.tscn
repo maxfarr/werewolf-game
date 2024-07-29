@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsc4r7njhlodn"]
+
+[ext_resource type="Script" path="res://scripts/minigames/intrusive_thought.gd" id="1_qnarf"]
+[ext_resource type="Texture2D" uid="uid://bub0yw0ylbrss" path="res://assets/Mini games/invasive-background.png" id="2_dwb7t"]
+[ext_resource type="Texture2D" uid="uid://2bdg5v034n30" path="res://assets/Mini games/invasive-exit.png" id="3_04cu5"]
+[ext_resource type="FontFile" uid="uid://clffuqe123t2m" path="res://assets/fonts/Micro_Chat.ttf" id="4_42s8p"]
+
+[node name="IntrusiveThought" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qnarf")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 0
+texture = ExtResource("2_dwb7t")
+
+[node name="ExitButton" type="TextureButton" parent="."]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 0
+offset_left = 88.0
+offset_top = 3.0
+offset_right = 128.0
+offset_bottom = 43.0
+texture_normal = ExtResource("3_04cu5")
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 12.0
+offset_top = 13.0
+offset_right = 88.0
+offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("4_42s8p")
+theme_override_font_sizes/font_size = 5
+text = "You're being boring!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+text_overrun_behavior = 1
+
+[connection signal="button_up" from="ExitButton" to="." method="_on_exit_button_button_up"]

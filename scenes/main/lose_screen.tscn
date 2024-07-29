@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://byucbay2g47gc"]
+[gd_scene load_steps=5 format=3 uid="uid://byucbay2g47gc"]
 
 [ext_resource type="Texture2D" uid="uid://dv3ha0yhovpf" path="res://assets/Endings/lose.png" id="1_f00ji"]
 [ext_resource type="Texture2D" uid="uid://cp7vuhuvwtmke" path="res://assets/Endings/lose-restart.png" id="2_jjppw"]
+[ext_resource type="FontFile" uid="uid://clffuqe123t2m" path="res://assets/fonts/Micro_Chat.ttf" id="3_c252u"]
+[ext_resource type="Script" path="res://scenes/main/restart_button.gd" id="3_vyrso"]
 
 [node name="LoseScreen" type="Node2D"]
 
@@ -13,7 +15,7 @@ offset_bottom = 40.0
 texture = ExtResource("1_f00ji")
 stretch_mode = 2
 
-[node name="TextureButton" type="TextureButton" parent="."]
+[node name="RestartButton" type="TextureButton" parent="."]
 texture_filter = 1
 offset_left = 366.0
 offset_top = 206.0
@@ -22,3 +24,45 @@ offset_bottom = 246.0
 texture_normal = ExtResource("2_jjppw")
 texture_pressed = ExtResource("2_jjppw")
 texture_hover = ExtResource("2_jjppw")
+script = ExtResource("3_vyrso")
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 128.0
+offset_top = 193.0
+offset_right = 280.0
+offset_bottom = 216.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_c252u")
+theme_override_font_sizes/font_size = 10
+text = "You transformed!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 286.0
+offset_top = 178.0
+offset_right = 438.0
+offset_bottom = 201.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_c252u")
+theme_override_font_sizes/font_size = 5
+text = "Try again?
+(Restart level)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="RestartButton" to="RestartButton" method="_on_button_down"]

@@ -72,4 +72,5 @@ func _handle_click(mouse_button):
 				_win_animation()
 			current_instruction += 1
 		else:
+			%MinigameTimer._stop()
 			_lose_animation()

@@ -104,8 +104,6 @@ func _grid_to_pixel_center(i, j):
 func _pixel_to_grid(pos):
 	var j = int(pos.x)/spacing
 	var i = int(pos.y)/spacing
-	if i >= grid_height or j >= grid_width or i < 0 or j < 0:
-		return null
 	return Vector2i(j, i)
 
 func _drop_tiles(empty_coords: Array):
@@ -297,26 +295,40 @@ func _find_swap_direction(first: Vector2i, second: Vector2i):
 	
 	return null
 
+func _handle_mouse_up():
+	pass
+
+func _pixel_out_of_bounds(position):
+	var grid_position = _pixel_to_grid(position)
+	print(grid_position)
+	return position.x < 0 or position.y < 0 or grid_position.x >= grid_width or grid_position.y >= grid_height
+
 func _on_gui_input(event):
 	if not running:
 		return
 	if event is InputEventMouseButton and not _currently_swapping:
 		if event.pressed:
 			swipe_start = event.position
-		else:
-			swipe_end = event.position
-			if swipe_end == null:
+			if _pixel_out_of_bounds(swipe_start):
 				swipe_start = null
-			elif swipe_start != null:
+				print("nulled")
+		else:
+			print(event)
+			swipe_end = event.position
+			if swipe_start != null:
 				var direction = _find_swap_direction(swipe_start, swipe_end)
 				if direction != null:
 					var swipe_start_grid = _pixel_to_grid(swipe_start)
 					match direction:
 						SwipeDirection.DOWN:
-							_swap_tiles(swipe_start_grid, Vector2i(swipe_start_grid.x, swipe_start_grid.y+1))
+							if swipe_start_grid.y < grid_height - 1:
+								_swap_tiles(swipe_start_grid, Vector2i(swipe_start_grid.x, swipe_start_grid.y+1))
 						SwipeDirection.UP:
-							_swap_tiles(swipe_start_grid, Vector2i(swipe_start_grid.x, swipe_start_grid.y-1))
+							if swipe_start_grid.y > 0:
+								_swap_tiles(swipe_start_grid, Vector2i(swipe_start_grid.x, swipe_start_grid.y-1))
 						SwipeDirection.RIGHT:
-							_swap_tiles(swipe_start_grid, Vector2i(swipe_start_grid.x+1, swipe_start_grid.y))
+							if swipe_start_grid.x < grid_width - 1:
+								_swap_tiles(swipe_start_grid, Vector2i(swipe_start_grid.x+1, swipe_start_grid.y))
 						SwipeDirection.LEFT:
-							_swap_tiles(swipe_start_grid, Vector2i(swipe_start_grid.x-1, swipe_start_grid.y))
+							if swipe_start_grid.x > 0:
+								_swap_tiles(swipe_start_grid, Vector2i(swipe_start_grid.x-1, swipe_start_grid.y))

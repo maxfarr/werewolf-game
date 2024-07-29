@@ -301,7 +301,14 @@ position = Vector2(324, 169)
 stream = ExtResource("24_qigmr")
 volume_db = 10.307
 
+[node name="FullscreenArea" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 5.0
+offset_bottom = 7.0
+
 [connection signal="gui_input" from="PotionClickArea/Match3" to="PotionClickArea/Match3" method="_on_gui_input"]
 [connection signal="gui_input" from="MainClickArea" to="." method="_on_main_click_area_gui_input"]
 [connection signal="mouse_exited" from="MainClickArea" to="." method="_on_main_click_area_mouse_exited"]
 [connection signal="gui_input" from="MainClickArea/main_background" to="." method="_on_main_background_gui_input"]
+[connection signal="gui_input" from="FullscreenArea" to="." method="_on_fullscreen_area_gui_input"]
