@@ -29,9 +29,9 @@ func _schedule_minigame():
 	next_minigame_timer.start()
 
 func _spawn_minigame():
-	var minigame_i = randi_range(0, minigames.size() - 1)
+	var minigame_i = randi_range(0, minigames.size() - 1 if GameState.level >= 2 else minigames.size() - 2)
 	while minigame_i == last_generated_minigame or minigame_i == -1:
-		minigame_i = randi_range(0, minigames.size() - 1)
+		minigame_i = randi_range(0, minigames.size() - 1 if GameState.level >= 2 else minigames.size() - 2)
 	var minigame = minigames[minigame_i].instantiate()
 	last_generated_minigame = minigame_i
 	if minigame_i == 3:
@@ -95,18 +95,19 @@ func _ready():
 	game_running = true
 
 func _lose():
-	game_running = false
-	%Match3.running = false
-	if %CurrentMinigame.get_child_count() > 0:
-		%CurrentMinigame.get_child(0).queue_free()
-	var tween = create_tween()
-	tween.tween_property(%fadeout, "self_modulate:a", 1.0, 1.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
-	tween.tween_callback(func():
-		if %TransformSFX3.playing:
-			await %TransformSFX3.finished
-		else:
-			await get_tree().create_timer(1.0).timeout
-		get_tree().change_scene_to_file("res://scenes/main/lose_screen.tscn"))
+	if game_running:
+		game_running = false
+		%Match3.running = false
+		if %CurrentMinigame.get_child_count() > 0:
+			%CurrentMinigame.get_child(0).queue_free()
+		var tween = create_tween()
+		tween.tween_property(%fadeout, "self_modulate:a", 1.0, 1.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+		tween.tween_callback(func():
+			if %TransformSFX3.playing:
+				await %TransformSFX3.finished
+			else:
+				await get_tree().create_timer(1.0).timeout
+			get_tree().change_scene_to_file("res://scenes/main/lose_screen.tscn"))
 
 func _finish_level():
 	next_minigame_timer.stop()

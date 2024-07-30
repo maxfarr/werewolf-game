@@ -45,7 +45,7 @@ func _handle_popup_closed(id):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	popups_remaining = 5#GameState.intrusive_thoughts_number[GameState.level]
+	popups_remaining = GameState.intrusive_thoughts_number[GameState.level]
 	
 	var positions = _generate_positions()
 	var random_popup_options = GameState.intrusive_thought_options.duplicate()

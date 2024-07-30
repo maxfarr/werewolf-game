@@ -9,10 +9,10 @@ const timer_durations_s = {
 	"eye_contact" : [14.0, 12.0, 12.0, 10.0, 9.0],
 	"hand_fidget" : [7.0, 7.0, 6.0, 6.0, 4.0],
 	"dialogue" : [9.0, 9.0, 8.0, 8.0, 7.0],
-	"intrusive_thoughts" : [7.0, 7.0, 6.0, 6.0, 5.0]
+	"intrusive_thoughts" : [6.0, 6.0, 6.0, 6.0, 6.0]
 }
 
-const intrusive_thoughts_number = [3, 4, 4, 5, 5]
+const intrusive_thoughts_number = [3, 3, 3, 4, 5]
 
 const heat_speeds = [20.0, 22.0, 24.0, 28.0, 32.0]
 
