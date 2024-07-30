@@ -203,7 +203,3 @@ func _on_main_click_area_gui_input(event):
 
 func _on_main_click_area_mouse_exited():
 	SignalBus.mouse_left_main_area.emit()
-
-func _on_fullscreen_area_gui_input(event):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
-			SignalBus.fullscreen_mouse_up.emit(event.position)
