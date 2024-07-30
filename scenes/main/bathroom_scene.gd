@@ -19,7 +19,7 @@ func _ready():
 	await %DrinkSFX.finished
 	
 	%Player.frame = 2
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.2).timeout
 	GameState.level += 1
 	
 	var handle_input = func(event):

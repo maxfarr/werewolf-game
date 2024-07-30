@@ -305,8 +305,8 @@ stream = ExtResource("24_qigmr")
 volume_db = 15.929
 
 [node name="MainMusic" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
 stream = ExtResource("25_qbsgy")
-volume_db = 1.873
 autoplay = true
 
 [node name="CurrentIntrusiveThoughts" type="Node2D" parent="."]

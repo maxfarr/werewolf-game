@@ -117,6 +117,8 @@ func _finish_level():
 		%CurrentMinigame.get_child(0).queue_free()
 	var tween = create_tween()
 	tween.tween_property(%fadeout, "self_modulate:a", 1.0, 1.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	var audio_tween = create_tween()
+	audio_tween.tween_property(%MainMusic, "volume_db", -80.0, 2.5)
 	var transition_to_next_screen = func():
 		await get_tree().create_timer(2.0).timeout
 		if GameState.level == 4:
@@ -207,7 +209,6 @@ func _on_main_background_gui_input(event):
 func _on_main_click_area_gui_input(event):
 	if game_running:
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-			print("PLEASE FUCKING WORK")
 			SignalBus.eye_contact_movement.emit(event)
 		if event is InputEventMouseMotion or InputEventMouseButton:
 			SignalBus.dialogue_movement.emit(event)
