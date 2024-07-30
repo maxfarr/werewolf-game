@@ -14,7 +14,10 @@ var transform_sounds = [
 ]
 
 const minigames = [
-	preload("res://scenes/minigames/dialogue.tscn"), preload("res://scenes/minigames/eye_contact.tscn"), preload("res://scenes/minigames/hand_fidget.tscn")
+	preload("res://scenes/minigames/dialogue.tscn"),
+	preload("res://scenes/minigames/eye_contact.tscn"),
+	preload("res://scenes/minigames/hand_fidget.tscn"),
+	preload("res://scenes/minigames/intrusive_thoughts.tscn")
 ]
 var last_generated_minigame: int = -1
 var next_minigame_timer: Timer

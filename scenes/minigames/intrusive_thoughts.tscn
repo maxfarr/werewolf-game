@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://bm1xku42yknx5"]
+
+[ext_resource type="Script" path="res://scripts/minigames/intrusive_thoughts.gd" id="1_k361v"]
+[ext_resource type="PackedScene" uid="uid://4aq1x6kyama" path="res://scenes/minigames/minigame_timer.tscn" id="2_uhtrs"]
+
+[node name="IntrusiveThoughts" type="Control"]
+z_index = 12
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k361v")
+
+[node name="TextureRect" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -20.0
+offset_top = -19.5
+offset_right = 20.0
+offset_bottom = 20.5
+
+[node name="MinigameTimer" parent="." instance=ExtResource("2_uhtrs")]
+unique_name_in_owner = true
+z_index = 2
+layout_mode = 1
+offset_left = 97.0
+offset_top = 131.5
+offset_right = 97.0
+offset_bottom = 131.5

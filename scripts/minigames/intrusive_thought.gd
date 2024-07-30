@@ -1,5 +1,7 @@
 extends Control
 
+var id
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -9,4 +11,4 @@ func _process(delta):
 	pass
 
 func _on_exit_button_button_up():
-	queue_free()
+	SignalBus.intrusive_thought_closed.emit(id)
