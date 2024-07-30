@@ -133,7 +133,6 @@ func _process(delta):
 	pass
 
 func _on_finish_area_body_entered(body):
-	print(%Head.position.y)
 	if (%Head.position.y > 26 and correct_option == 2) or (%Head.position.y <= 26 and correct_option == 1):
 		%MinigameTimer._stop()
 		%MinigameTimer.visible = false

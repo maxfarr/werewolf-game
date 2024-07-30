@@ -300,7 +300,6 @@ func _handle_mouse_up():
 
 func _pixel_out_of_bounds(position):
 	var grid_position = _pixel_to_grid(position)
-	print(grid_position)
 	return position.x < 0 or position.y < 0 or grid_position.x >= grid_width or grid_position.y >= grid_height
 
 func _on_gui_input(event):
@@ -311,9 +310,7 @@ func _on_gui_input(event):
 			swipe_start = event.position
 			if _pixel_out_of_bounds(swipe_start):
 				swipe_start = null
-				print("nulled")
 		else:
-			print(event)
 			swipe_end = event.position
 			if swipe_start != null:
 				var direction = _find_swap_direction(swipe_start, swipe_end)

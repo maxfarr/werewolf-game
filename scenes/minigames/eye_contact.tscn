@@ -41,6 +41,7 @@ offset_right = -0.309998
 offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_yilgt")
 
 [node name="ColorRect" type="TextureRect" parent="."]
@@ -200,7 +201,7 @@ stretch_mode = 2
 unique_name_in_owner = true
 position = Vector2(66, 45)
 stream = ExtResource("13_qodpg")
-volume_db = 3.748
+volume_db = 10.307
 
 [node name="TextureRect4" type="TextureRect" parent="."]
 texture_filter = 1

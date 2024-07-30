@@ -34,7 +34,10 @@ func _spawn_minigame():
 		minigame_i = randi_range(0, minigames.size() - 1)
 	var minigame = minigames[minigame_i].instantiate()
 	last_generated_minigame = minigame_i
-	%CurrentMinigame.add_child(minigame)
+	if minigame_i == 3:
+		%CurrentIntrusiveThoughts.add_child(minigame)
+	else:
+		%CurrentMinigame.add_child(minigame)
 
 func _handle_love_interest_animation():
 	var animation_choice = "wine" if randi_range(0, 3) == 0 else "default"
@@ -156,7 +159,10 @@ func _minigame_failed():
 	%FailureSFX.play()
 	await %FailureSFX.finished
 	
-	%CurrentMinigame.get_child(0).queue_free()
+	if last_generated_minigame == 3:
+		%CurrentIntrusiveThoughts.get_child(0).queue_free()
+	else:
+		%CurrentMinigame.get_child(0).queue_free()
 	_animate_minigame_result("Oops...")
 	
 	love_interest_animation_timer.stop()
@@ -182,7 +188,10 @@ func _minigame_succeeded():
 	%SuccessSFX.play()
 	await %SuccessSFX.finished
 	
-	%CurrentMinigame.get_child(0).queue_free()
+	if last_generated_minigame == 3:
+		%CurrentIntrusiveThoughts.get_child(0).queue_free()
+	else:
+		%CurrentMinigame.get_child(0).queue_free()
 	_animate_minigame_result("Nice!")
 	
 	love_interest_animation_timer.stop()
@@ -196,6 +205,9 @@ func _on_main_background_gui_input(event):
 
 func _on_main_click_area_gui_input(event):
 	if game_running:
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+			print("PLEASE FUCKING WORK")
+			SignalBus.eye_contact_movement.emit(event)
 		if event is InputEventMouseMotion or InputEventMouseButton:
 			SignalBus.dialogue_movement.emit(event)
 		if event is InputEventMouseButton and event.pressed:

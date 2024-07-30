@@ -8,3 +8,4 @@ signal mouse_left_main_area
 signal dialogue_started
 signal dialogue_ended
 signal intrusive_thought_closed
+signal eye_contact_movement

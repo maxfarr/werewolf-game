@@ -10,6 +10,8 @@ var target_update_timer : Timer
 var minigame_timer : Timer
 var running = true
 
+var held = false
+
 var _noise = FastNoiseLite.new()
 
 var target_active = false
@@ -30,6 +32,9 @@ func _ready():
 	%PlayerEyes.frame = 0
 	%EyeContactSFX.play()
 	
+	SignalBus.eye_contact_movement.connect(_handle_input)
+	SignalBus.mouse_left_main_area.connect(_handle_mouse_leave)
+	
 	%MinigameTimer.failure.connect(func():
 		running = false
 		%PlayerEyes.frame = 2
@@ -42,7 +47,7 @@ func _update_target_movement():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if running:
-		if Input.is_mouse_button_pressed(1) and get_viewport().get_mouse_position().x < GameState.SCREEN_DIVISION_X:
+		if held:
 			eye_accel = Vector2(0.12, 0.0)
 		else:
 			eye_accel = Vector2(-0.12, 0.0)
@@ -79,6 +84,11 @@ func _physics_process(delta):
 func _on_area_2d_body_entered(body):
 	target_active = true
 
-
 func _on_area_2d_body_exited(body):
 	target_active = false # Replace with function body.
+
+func _handle_input(event):
+	held = event.pressed
+
+func _handle_mouse_leave():
+	held = false

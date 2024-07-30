@@ -6,7 +6,7 @@ const max_x = 21
 const min_y = -63
 const max_y = 93
 
-const min_popup_distance = 20.0
+const min_popup_distance = 25.0
 
 var popups_remaining = 0
 
@@ -45,7 +45,7 @@ func _handle_popup_closed(id):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	popups_remaining = GameState.intrusive_thoughts_number[GameState.level]
+	popups_remaining = 5#GameState.intrusive_thoughts_number[GameState.level]
 	
 	var positions = _generate_positions()
 	var random_popup_options = GameState.intrusive_thought_options.duplicate()
@@ -65,6 +65,7 @@ func _ready():
 		running = false
 		SignalBus.minigame_failed.emit())
 	%MinigameTimer._start(GameState.timer_durations_s["intrusive_thoughts"][GameState.level])
+	%IntrusiveThoughtsSFX.play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

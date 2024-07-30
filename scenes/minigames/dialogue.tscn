@@ -296,7 +296,7 @@ shape = SubResource("RectangleShape2D_bltgs")
 unique_name_in_owner = true
 position = Vector2(-58, -23.5)
 stream = ExtResource("9_ix8sk")
-volume_db = 2.811
+volume_db = 13.118
 max_polyphony = 50
 panning_strength = 1.49
 
@@ -304,13 +304,13 @@ panning_strength = 1.49
 unique_name_in_owner = true
 position = Vector2(-66, 50.5)
 stream = ExtResource("10_cy0b7")
-volume_db = 1.874
+volume_db = 8.433
 
 [node name="StartSFX" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(-66, 50.5)
 stream = ExtResource("11_qqcyx")
-volume_db = 1.874
+volume_db = 8.433
 
 [node name="Instructions" type="TextureRect" parent="."]
 unique_name_in_owner = true
