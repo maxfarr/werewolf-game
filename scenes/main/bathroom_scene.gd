@@ -10,7 +10,8 @@ func _refill_health():
 func _ready():
 	%Avatar.frame = GameState.health
 	%Player.frame = 0
-	await get_tree().create_timer(1.0).timeout
+	%PopSFX.play()
+	await get_tree().create_timer(0.6).timeout
 	
 	%DrinkSFX.play()
 	%Player.frame = 1
@@ -19,7 +20,6 @@ func _ready():
 	await %DrinkSFX.finished
 	
 	%Player.frame = 2
-	await get_tree().create_timer(0.2).timeout
 	GameState.level += 1
 	
 	var handle_input = func(event):

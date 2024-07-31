@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b7382vpae7w7e"
+path="res://.godot/imported/WW_Potion_Drink_Drinking_01.wav-9d46511033222c6752f312532d78e06b.sample"
+
+[deps]
+
+source_file="res://assets/wav/Gameplay Elements/Potion/WW_Potion_Drink_Drinking_01.wav"
+dest_files=["res://.godot/imported/WW_Potion_Drink_Drinking_01.wav-9d46511033222c6752f312532d78e06b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

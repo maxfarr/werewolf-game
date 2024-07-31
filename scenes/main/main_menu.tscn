@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://ciune21xyyjas"]
+
+[ext_resource type="Texture2D" uid="uid://cpbsjrwrloax2" path="res://assets/Splash/splash-background.png" id="1_u8l1i"]
+[ext_resource type="Script" path="res://scenes/main/main_menu.gd" id="1_vv1od"]
+[ext_resource type="Texture2D" uid="uid://cfivx0dflavht" path="res://assets/Splash/logo.png" id="2_f1n31"]
+[ext_resource type="Texture2D" uid="uid://d2kgg4rpdl2tb" path="res://assets/Splash/splash-button.png" id="3_c12w8"]
+[ext_resource type="Theme" uid="uid://dllw0cj5wjat7" path="res://resources/tomorrow_night.tres" id="5_iyyny"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_vv1od")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 1
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_u8l1i")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 1
+offset_left = 256.0
+offset_top = 9.0
+offset_right = 394.0
+offset_bottom = 138.0
+texture = ExtResource("2_f1n31")
+
+[node name="StartButton" type="TextureButton" parent="."]
+offset_left = 283.0
+offset_top = 133.0
+offset_right = 357.0
+offset_bottom = 173.0
+texture_normal = ExtResource("3_c12w8")
+
+[node name="Label" type="Label" parent="StartButton"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 74.0
+offset_bottom = 27.0
+theme = ExtResource("5_iyyny")
+theme_override_font_sizes/font_size = 8
+text = "START"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Fadein" type="ColorRect" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 400.0
+offset_bottom = 225.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="button_up" from="StartButton" to="." method="_on_start_button_button_up"]

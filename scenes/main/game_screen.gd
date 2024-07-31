@@ -100,6 +100,8 @@ func _lose():
 		%Match3.running = false
 		if %CurrentMinigame.get_child_count() > 0:
 			%CurrentMinigame.get_child(0).queue_free()
+		if %CurrentIntrusiveThoughts.get_child_count() > 0:
+			%CurrentMinigame.get_child(0).queue_free()
 		var tween = create_tween()
 		tween.tween_property(%fadeout, "self_modulate:a", 1.0, 1.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 		tween.tween_callback(func():
@@ -114,6 +116,8 @@ func _finish_level():
 	game_running = false
 	%Match3.running = false
 	if %CurrentMinigame.get_child_count() > 0:
+		%CurrentMinigame.get_child(0).queue_free()
+	if %CurrentIntrusiveThoughts.get_child_count() > 0:
 		%CurrentMinigame.get_child(0).queue_free()
 	var tween = create_tween()
 	tween.tween_property(%fadeout, "self_modulate:a", 1.0, 1.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
@@ -159,33 +163,33 @@ func _animate_minigame_result(result: String):
 	tween_out.tween_callback(func(): %MinigameResult.visible = false)
 
 func _minigame_failed():
-	%FailureSFX.play()
-	await %FailureSFX.finished
-	
-	if last_generated_minigame == 3:
-		%CurrentIntrusiveThoughts.get_child(0).queue_free()
-	else:
-		%CurrentMinigame.get_child(0).queue_free()
-	_animate_minigame_result("Oops...")
-	
-	love_interest_animation_timer.stop()
-	%LoveInterest.play("minigame_failure")
-	%LoveInterest.animation_finished.connect(func(): love_interest_animation_timer.start())
-	
-	GameState.health -= 1
-	%Avatar.frame = GameState.health
-	%AvatarFlash.play("flash")
-	
-	if GameState.health == 2:
-		%TransformSFX1.play()
-	elif GameState.health == 1:
-		%TransformSFX2.play()
-	elif GameState.health == 0:
-		%TransformSFX3.play()
-		_lose()
-		return
-	
-	_schedule_minigame()
+	if game_running:
+		%FailureSFX.play()
+		await %FailureSFX.finished
+		
+		if last_generated_minigame == 3 and %CurrentIntrusiveThoughts.get_child_count() > 0:
+			%CurrentIntrusiveThoughts.get_child(0).queue_free()
+		elif %CurrentMinigame.get_child_count() > 0:
+			%CurrentMinigame.get_child(0).queue_free()
+		_animate_minigame_result("Oops...")
+		
+		love_interest_animation_timer.stop()
+		%LoveInterest.play("minigame_failure")
+		%LoveInterest.animation_finished.connect(func(): love_interest_animation_timer.start())
+		
+		GameState.health -= 1
+		%Avatar.frame = GameState.health
+		%AvatarFlash.play("flash")
+		
+		if GameState.health == 2:
+			%TransformSFX1.play()
+		elif GameState.health == 1:
+			%TransformSFX2.play()
+		elif GameState.health == 0:
+			%TransformSFX3.play()
+			_lose()
+			return
+		_schedule_minigame()
 
 func _minigame_succeeded():
 	%SuccessSFX.play()

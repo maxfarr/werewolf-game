@@ -201,7 +201,7 @@ stretch_mode = 2
 unique_name_in_owner = true
 position = Vector2(66, 45)
 stream = ExtResource("13_qodpg")
-volume_db = 10.307
+volume_db = 12.181
 
 [node name="TextureRect4" type="TextureRect" parent="."]
 texture_filter = 1
