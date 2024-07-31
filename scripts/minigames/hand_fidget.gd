@@ -65,6 +65,7 @@ func _handle_click(mouse_button):
 			return
 		
 		if mouse_button - 1 == instructions[current_instruction]:
+			%ClickSFX.play()
 			instruction_visuals[current_instruction].visible = false
 			if current_instruction == 4:
 				running = false

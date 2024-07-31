@@ -1,13 +1,13 @@
 extends Node
 
-var level = 4
+var level = 0
 var health
 
 var first_dialogue = true
 var instructions_read = false
 
 const timer_durations_s = {
-	"eye_contact" : [12.0, 10.0, 10.0, 8.0, 7.0],
+	"eye_contact" : [12.0, 10.0, 10.0, 9.0, 8.0],
 	"hand_fidget" : [7.0, 7.0, 6.0, 6.0, 4.0],
 	"dialogue" : [9.0, 9.0, 8.0, 8.0, 7.0],
 	"intrusive_thoughts" : [6.0, 6.0, 6.0, 5.5, 5.0]
@@ -15,7 +15,7 @@ const timer_durations_s = {
 
 const intrusive_thoughts_number = [3, 3, 5, 5, 5]
 
-const heat_speeds = [20.0, 22.0, 24.0, 28.0, 32.0]
+const heat_speeds = [20.0, 22.0, 24.0, 27.0, 30.0]
 
 const event_delay_ranges = [[5, 10], [4, 8], [3, 7], [3, 5], [2, 4]]
 
@@ -38,10 +38,10 @@ const dialogue_options = [
 	{"loveinterest": "What's your worst habit?", "correct": "Oversleeping", "wolfy": "Biting people"},
 	{"loveinterest": "What's your hidden talent?", "correct": "Juggling", "wolfy": "Barking"},
 	{"loveinterest": "What's on your bucket list?", "correct": "Skydiving", "wolfy": "Killing a deer"},
-	{"loveinterest": "What's your pet peeve?", "correct": "Rudeness", "wolfy": "Animal control"},
+	{"loveinterest": "What's your pet peeve?", "correct": "Rudeness", "wolfy": "Animal Control"},
 	{"loveinterest": "What's your favorite vacation spot?", "correct": "The beach", "wolfy": "Creepy dungeon"},
-	{"loveinterest": "What do you think of Kant's Categorical Imperative?", "correct": "Desire is controllable", "wolfy": "AKJSGHFKGJHASDSDFKGSDKJHGFKJFGKJSAFHFDJHKSFJKSKJHDFJGSKDGHHJDFGSHJKJSDJHKG"},
+	{"loveinterest": "What do you think of Kant's Categorical Imperative?", "correct": "Desire is controllable", "wolfy": "AKJSGHFKGJHASDSDFKGSDKJ"},
 	{"loveinterest": "What kind of music do you listen to?", "correct": "Fusion Jazz", "wolfy": "Howling"},
 	{"loveinterest": "Do you have any hobbies?", "correct": "Pottery", "wolfy": "Chewing on bones"},
-	{"loveinterest": "Isn't the full moon beautiful tonight?", "correct": "Yeah", "wolfy": "AWOOOOO"},
+	{"loveinterest": "Isn't the full moon beautiful tonight?", "correct": "Yeah", "wolfy": "AWOOOOO"},                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
 ]

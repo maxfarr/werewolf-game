@@ -18,7 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://d3kapomjx852e" path="res://assets/wav/UI/Success-Failure/WW_MiniGame_Failure_01.wav" id="16_f0wog"]
 [ext_resource type="AudioStream" uid="uid://d0a13em6ny0i6" path="res://assets/wav/Damage/WW_Dmage_01.wav" id="17_kwcs8"]
 [ext_resource type="AudioStream" uid="uid://c4jxcc3yyc3v7" path="res://assets/wav/Damage/WW_Dmage_02.wav" id="18_datwm"]
-[ext_resource type="AudioStream" uid="uid://ds18qbc1p87r0" path="res://assets/wav/Damage/WW_Dmage_03.wav" id="19_jk47v"]
+[ext_resource type="AudioStream" uid="uid://dhs07budv5tj5" path="res://assets/wav/Damage/damage3.wav" id="19_o7aof"]
 [ext_resource type="Theme" uid="uid://bkar4nae0cei3" path="res://resources/wellfleet.tres" id="20_jmore"]
 [ext_resource type="AudioStream" uid="uid://ctujyw0tdfpt3" path="res://assets/wav/Gameplay Elements/Potion/WW_Potion_Explode_01.wav" id="21_u6y33"]
 [ext_resource type="AudioStream" uid="uid://citr2lh5755ht" path="res://assets/wav/Match 3/WW_M3_Success_Three.wav" id="22_ukkry"]
@@ -244,8 +244,7 @@ volume_db = 13.118
 [node name="TransformSFX3" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(31, 184)
-stream = ExtResource("19_jk47v")
-volume_db = 13.118
+stream = ExtResource("19_o7aof")
 
 [node name="AvatarFlash" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -303,12 +302,12 @@ volume_db = 15.929
 unique_name_in_owner = true
 position = Vector2(324, 169)
 stream = ExtResource("24_qigmr")
-volume_db = 15.929
+volume_db = 16.866
 
 [node name="MainMusic" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("25_qbsgy")
-volume_db = -0.937
+volume_db = -1.874
 autoplay = true
 
 [node name="CurrentIntrusiveThoughts" type="Node2D" parent="."]

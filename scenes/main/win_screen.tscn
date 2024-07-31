@@ -160,6 +160,6 @@ volume_db = 8.433
 [node name="EndChime2" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("11_kuxiw")
-volume_db = 3.748
+volume_db = 2.5
 
 [connection signal="gui_input" from="ClickArea" to="." method="_on_click_area_gui_input"]

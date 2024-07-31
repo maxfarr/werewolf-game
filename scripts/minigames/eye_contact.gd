@@ -42,7 +42,14 @@ func _ready():
 	%MinigameTimer._start(GameState.timer_durations_s["eye_contact"][GameState.level])
 
 func _update_target_movement():
-	target_velocity = Vector2(_noise.get_noise_1d(Time.get_ticks_msec())*2.0, 0.0)
+	target_velocity = Vector2(_noise.get_noise_1d(Time.get_ticks_msec())*2.2, 0.0)
+	# if we're near the edges, add a 50% chance to flip velocities heading into the edge
+	# to gently encourage target to move away from edges
+	var should_flip_at_edge = randi_range(0, 1)
+	if position.x <= -43 and should_flip_at_edge == 1 and target_velocity.x < 0:
+		target_velocity.x = -target_velocity.x
+	elif position.x >= 44 and should_flip_at_edge == 1 and target_velocity.x > 0:
+		target_velocity.x = -target_velocity.x
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):

@@ -115,10 +115,14 @@ func _lose():
 	if game_running:
 		game_running = false
 		%Match3.running = false
+		
 		if %CurrentMinigame.get_child_count() > 0:
 			%CurrentMinigame.get_child(0).queue_free()
 		if %CurrentIntrusiveThoughts.get_child_count() > 0:
-			%CurrentMinigame.get_child(0).queue_free()
+			%CurrentIntrusiveThoughts.get_child(0).queue_free()
+		
+		var audio_tween = create_tween()
+		audio_tween.tween_property(%MainMusic, "volume_db", -80.0, 1.5)
 		var tween = create_tween()
 		tween.tween_property(%fadeout, "self_modulate:a", 1.0, 1.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 		tween.tween_callback(func():
@@ -135,7 +139,7 @@ func _finish_level():
 	if %CurrentMinigame.get_child_count() > 0:
 		%CurrentMinigame.get_child(0).queue_free()
 	if %CurrentIntrusiveThoughts.get_child_count() > 0:
-		%CurrentMinigame.get_child(0).queue_free()
+		%CurrentIntrusiveThoughts.get_child(0).queue_free()
 	var tween = create_tween()
 	tween.tween_property(%fadeout, "self_modulate:a", 1.0, 1.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 	var audio_tween = create_tween()
@@ -184,7 +188,7 @@ func _minigame_failed():
 		%FailureSFX.play()
 		await %FailureSFX.finished
 		
-		if last_generated_minigame == 3 and %CurrentIntrusiveThoughts.get_child_count() > 0:
+		if %CurrentIntrusiveThoughts.get_child_count() > 0:
 			%CurrentIntrusiveThoughts.get_child(0).queue_free()
 		elif %CurrentMinigame.get_child_count() > 0:
 			%CurrentMinigame.get_child(0).queue_free()
@@ -212,9 +216,9 @@ func _minigame_succeeded():
 	%SuccessSFX.play()
 	await %SuccessSFX.finished
 	
-	if last_generated_minigame == 3:
+	if %CurrentIntrusiveThoughts.get_child_count() > 0:
 		%CurrentIntrusiveThoughts.get_child(0).queue_free()
-	else:
+	elif %CurrentMinigame.get_child_count() > 0:
 		%CurrentMinigame.get_child(0).queue_free()
 	_animate_minigame_result("Nice!")
 	

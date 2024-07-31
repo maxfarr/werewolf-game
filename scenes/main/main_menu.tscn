@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://d2kgg4rpdl2tb" path="res://assets/Splash/splash-button.png" id="3_c12w8"]
 [ext_resource type="Texture2D" uid="uid://dql4dn7mbgp4g" path="res://assets/Splash/splash-button-down.png" id="5_1tn1c"]
 [ext_resource type="Theme" uid="uid://dllw0cj5wjat7" path="res://resources/tomorrow_night.tres" id="5_iyyny"]
-[ext_resource type="AudioStream" uid="uid://ctupb6i2tmu6t" path="res://assets/wav/UI/Clicks/WW_PassingOver_Click._02wav.wav" id="7_tjch4"]
-[ext_resource type="AudioStream" uid="uid://r7o7h778b6s0" path="res://assets/wav/WW_MainMenu_Full.mp3" id="8_4hjd7"]
-[ext_resource type="AudioStream" uid="uid://rsytreu8he6" path="res://assets/wav/WW_MainMenu_LOOP.mp3" id="9_45agv"]
+[ext_resource type="AudioStream" uid="uid://beofiwwcqbiqv" path="res://assets/wav/UI/Clicks/WW_UIClick_02.mp3" id="7_qx48s"]
+[ext_resource type="AudioStream" uid="uid://04kjopcpak62" path="res://assets/wav/WW_MainMenu_Full_03.mp3" id="8_qojx7"]
+[ext_resource type="AudioStream" uid="uid://3prgfwpl4ice" path="res://assets/wav/WW_MainMenu_LOOP_02.mp3" id="9_qvubj"]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource("1_vv1od")
@@ -58,17 +58,17 @@ color = Color(0, 0, 0, 1)
 
 [node name="ClickSFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("7_tjch4")
-volume_db = 23.424
+stream = ExtResource("7_qx48s")
+volume_db = 6.558
 
 [node name="MusicIntro" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("8_4hjd7")
-volume_db = -2.811
+stream = ExtResource("8_qojx7")
+volume_db = 0.2
 
 [node name="MusicLoop" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("9_45agv")
-volume_db = -2.811
+stream = ExtResource("9_qvubj")
+volume_db = 0.2
 
 [connection signal="button_up" from="StartButton" to="." method="_on_start_button_button_up"]

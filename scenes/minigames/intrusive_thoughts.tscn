@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/minigames/intrusive_thoughts.gd" id="1_k361v"]
 [ext_resource type="PackedScene" uid="uid://4aq1x6kyama" path="res://scenes/minigames/minigame_timer.tscn" id="2_uhtrs"]
 [ext_resource type="AudioStream" uid="uid://d1r0wvq1a07jf" path="res://assets/wav/Intrusive Thoughts/WW_MiniGame_IntrusiveThoughts_01.mp3" id="3_dxugi"]
-[ext_resource type="AudioStream" uid="uid://d4ld3mkplip7i" path="res://assets/wav/UI/Clicks/WW_PassingOver_Click_01.wav" id="4_fet1a"]
+[ext_resource type="AudioStream" uid="uid://beofiwwcqbiqv" path="res://assets/wav/UI/Clicks/WW_UIClick_02.mp3" id="4_2mltp"]
 
 [node name="IntrusiveThoughts" type="Control"]
 z_index = 12
@@ -42,6 +42,6 @@ volume_db = 12.18
 
 [node name="ClickSFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("4_fet1a")
-volume_db = 23.423
+stream = ExtResource("4_2mltp")
+volume_db = 8.432
 max_polyphony = 5

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://y8acnahafpgi"]
+[gd_scene load_steps=10 format=3 uid="uid://y8acnahafpgi"]
 
 [ext_resource type="SpriteFrames" uid="uid://csjhsxnolei5o" path="res://assets/animations/hand_shake.tres" id="1_emqim"]
 [ext_resource type="Script" path="res://scripts/minigames/hand_fidget.gd" id="1_fh8yw"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://4aq1x6kyama" path="res://scenes/minigames/minigame_timer.tscn" id="5_ofhd4"]
 [ext_resource type="Texture2D" uid="uid://lvvkbsi8kwsd" path="res://assets/Mini games/hand-text2.png" id="6_e1uq6"]
 [ext_resource type="Texture2D" uid="uid://brch1pobnlnb5" path="res://assets/Mini games/hand-text3.png" id="7_jayys"]
+[ext_resource type="AudioStream" uid="uid://beofiwwcqbiqv" path="res://assets/wav/UI/Clicks/WW_UIClick_02.mp3" id="9_uv7fb"]
 
 [node name="hand_fidget" type="Control"]
 z_index = 10
@@ -146,3 +147,8 @@ offset_left = 68.0
 offset_top = 16.0
 offset_right = 68.0
 offset_bottom = 16.0
+
+[node name="ClickSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("9_uv7fb")
+volume_db = 8.432

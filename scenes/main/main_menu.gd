@@ -15,6 +15,7 @@ func _process(delta):
 
 func _on_start_button_button_up():
 	%ClickSFX.play()
+	
 	var tween = create_tween()
 	tween.tween_property(%Fadein, "self_modulate:a", 1.0, 2.0)
 	tween.tween_callback(func():
