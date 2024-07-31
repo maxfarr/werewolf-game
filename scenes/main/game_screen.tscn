@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dd5xaxkseexq6"]
+[gd_scene load_steps=29 format=3 uid="uid://dd5xaxkseexq6"]
 
 [ext_resource type="Script" path="res://scenes/main/game_screen.gd" id="1_5i3jp"]
 [ext_resource type="Texture2D" uid="uid://lwl0515ctifm" path="res://assets/Main Screen/background.png" id="1_tas65"]
@@ -25,6 +25,7 @@
 [ext_resource type="AudioStream" uid="uid://c4c5sf3y850vp" path="res://assets/wav/Match 3/WW_M3_Success_Four.wav" id="23_ebnkn"]
 [ext_resource type="AudioStream" uid="uid://c1s0ubv7qke15" path="res://assets/wav/Match 3/WW_M3_Success_FiveAbove.wav" id="24_qigmr"]
 [ext_resource type="AudioStream" uid="uid://jad15pcbcy8u" path="res://assets/wav/WereWolf_Theme_4.2_Loop.mp3" id="25_qbsgy"]
+[ext_resource type="Texture2D" uid="uid://dssl4tgag512p" path="res://assets/Main Screen/overlay.png" id="26_kgejv"]
 
 [sub_resource type="Animation" id="Animation_atwfp"]
 resource_name = "flash"
@@ -221,12 +222,12 @@ frame = 3
 [node name="SuccessSFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("15_age6k")
-volume_db = 13.118
+volume_db = 12.181
 
 [node name="FailureSFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("16_f0wog")
-volume_db = 13.118
+volume_db = 12.181
 
 [node name="TransformSFX1" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
@@ -313,6 +314,16 @@ autoplay = true
 [node name="CurrentIntrusiveThoughts" type="Node2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(121, 68)
+
+[node name="InstructionsOverlay" type="TextureRect" parent="."]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+texture_repeat = 1
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 0
+texture = ExtResource("26_kgejv")
 
 [connection signal="gui_input" from="PotionClickArea/Match3" to="PotionClickArea/Match3" method="_on_gui_input"]
 [connection signal="gui_input" from="MainClickArea" to="." method="_on_main_click_area_gui_input"]

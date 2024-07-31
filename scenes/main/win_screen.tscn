@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cnoqdgjfurpbx"]
+[gd_scene load_steps=13 format=3 uid="uid://cnoqdgjfurpbx"]
 
 [ext_resource type="Script" path="res://scenes/main/win_screen.gd" id="1_hyof4"]
 [ext_resource type="Texture2D" uid="uid://54xendjioumv" path="res://assets/Endings/win-1-1.png" id="2_j16au"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://vhjojfe1ltll" path="res://assets/Endings/win-3-1.png" id="7_dve0j"]
 [ext_resource type="Texture2D" uid="uid://beoeli56pjrdp" path="res://assets/Endings/win-3-2.png" id="8_ouf4q"]
 [ext_resource type="Texture2D" uid="uid://bnnui5jwan6f5" path="res://assets/Endings/clicknext.png" id="9_qrcwu"]
+[ext_resource type="AudioStream" uid="uid://c2yps4uvjykmu" path="res://assets/wav/end_song.mp3" id="10_4n7nb"]
+[ext_resource type="AudioStream" uid="uid://3p21ioy8ldjd" path="res://assets/wav/end_chime_1.wav" id="10_ybk2h"]
+[ext_resource type="AudioStream" uid="uid://dyrdwyr0bp7p2" path="res://assets/wav/end_chime_2.wav" id="11_kuxiw"]
 
 [node name="WinScreen" type="Node2D"]
 script = ExtResource("1_hyof4")
@@ -142,5 +145,21 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 400.0
 offset_bottom = 225.0
+
+[node name="EndMusic" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("10_4n7nb")
+volume_db = -1.874
+autoplay = true
+
+[node name="EndChime1" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("10_ybk2h")
+volume_db = 8.433
+
+[node name="EndChime2" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("11_kuxiw")
+volume_db = 3.748
 
 [connection signal="gui_input" from="ClickArea" to="." method="_on_click_area_gui_input"]

@@ -20,7 +20,13 @@ func _ready():
 	SignalBus.mouse_left_main_area.connect(_mouse_left_area)
 	%Instructions.visible = false
 	%Countdown.scale = Vector2(0.0, 0.0)
-	var text = GameState.dialogue_options[randi_range(0, GameState.dialogue_options.size() - 1)]
+	var i
+	if GameState.first_dialogue:
+		i = 0
+		GameState.first_dialogue = false
+	else:
+		i = randi_range(0, GameState.dialogue_options.size() - 1)
+	var text = GameState.dialogue_options[i]
 	correct_option = randi_range(1, 2)
 	if correct_option == 1:
 		%Option1.text = text["correct"]

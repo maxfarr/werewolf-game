@@ -55,6 +55,23 @@ func _on_dialogue_end():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if GameState.instructions_read:
+		%InstructionsOverlay.queue_free()
+		_start_game()
+	else:
+		GameState.instructions_read = true
+		%InstructionsOverlay.visible = true
+		
+		var clicked = false
+		var _handle_click = func(event):
+			if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and not clicked:
+				clicked = true
+				%InstructionsOverlay.queue_free()
+				_start_game()
+		
+		%InstructionsOverlay.gui_input.connect(_handle_click)
+
+func _start_game():
 	SignalBus.dialogue_started.connect(_on_dialogue_start)
 	SignalBus.dialogue_ended.connect(_on_dialogue_end)
 	

@@ -3,7 +3,10 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	%MusicIntro.finished.connect(func():
+		%MusicIntro.stop()
+		%MusicLoop.play())
+	%MusicIntro.play()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -11,6 +14,7 @@ func _process(delta):
 	pass
 
 func _on_start_button_button_up():
+	%ClickSFX.play()
 	var tween = create_tween()
 	tween.tween_property(%Fadein, "self_modulate:a", 1.0, 2.0)
 	tween.tween_callback(func():

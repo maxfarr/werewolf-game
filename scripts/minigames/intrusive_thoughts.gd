@@ -35,6 +35,7 @@ func _generate_positions():
 
 func _handle_popup_closed(id):
 	if running:
+		%ClickSFX.play()
 		popups[id].queue_free()
 		popups_remaining -= 1
 		if popups_remaining == 0:

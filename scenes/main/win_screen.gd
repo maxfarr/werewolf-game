@@ -28,9 +28,19 @@ func _handle_click():
 			tween.tween_property(%Panel2_3, "self_modulate:a", 1.0, 0.8).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 			await tween.finished
 		4:
+			#var volume_tween = create_tween()
+			#volume_tween.tween_property(%EndMusic, "volume_db", -80.0, 0.8)
+			
 			var tween1 = create_tween()
 			tween1.tween_property(%Screen2, "modulate:a", 0.0, 0.8).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 			await tween1.finished
+			
+			var chime_timer = Timer.new()
+			chime_timer.wait_time = 0.4
+			chime_timer.one_shot = true
+			chime_timer.timeout.connect(func(): %EndChime1.play())
+			add_child(chime_timer)
+			chime_timer.start()
 			
 			var tween2 = create_tween()
 			tween2.tween_property(%Screen3, "modulate:a", 1.0, 0.8).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
@@ -39,15 +49,16 @@ func _handle_click():
 			var tween = create_tween()
 			tween.tween_property(%Panel3_2, "position:x", 240, 1.0).set_trans(Tween.TRANS_SPRING).set_ease(Tween.EASE_OUT)
 			await tween.finished
+			%EndChime2.play()
 	progress += 1
-	await get_tree().create_timer(0.8).timeout
+	await get_tree().create_timer(1.5).timeout
 	if progress < 6:
 		click_active = true
 		%Mouse.visible = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(1.5).timeout
 	%Mouse.visible = true
 	click_active = true
 
