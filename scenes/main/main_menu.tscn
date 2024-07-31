@@ -65,6 +65,7 @@ volume_db = 6.558
 unique_name_in_owner = true
 stream = ExtResource("8_qojx7")
 volume_db = 0.2
+autoplay = true
 
 [node name="MusicLoop" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true

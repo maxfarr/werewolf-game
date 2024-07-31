@@ -302,7 +302,7 @@ volume_db = 15.929
 unique_name_in_owner = true
 position = Vector2(324, 169)
 stream = ExtResource("24_qigmr")
-volume_db = 16.866
+volume_db = 17.803
 
 [node name="MainMusic" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
